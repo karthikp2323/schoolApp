@@ -1,157 +1,140 @@
 
 <body class="landing-body">
-<nav class="navbar navbar-default custom-nav-bar">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">
-                <small>
-                            <img src="/assets/logo01.png" alt="" />
-                        </small>
-              </a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-      
-      <ul class="nav navbar-nav navbar-right">
-        
-        <li><a href="#features">Features</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="login-li"><a href="/home/login">
-          <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Login</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<header>
-        
-<div class="div">
-    <div class="header-content">
-            <div class="header-content-inner">
-                
-                <p>Providing seamless communication between parents and school community</p>
-                <a href="/schools/new" class="btn btn-default btn-get-started">Get Started Free Today!</a>
-            </div>
-    </div>
-</div>
-
-</header>
-
-<section id="features">
+  <!-- Landing Page Navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top custom-nav-bar">
     <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">At Your Service</h2>
-                    <hr class="primary">
-                </div>
-            </div>
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to root_path, :class => "navbar-brand" do %>
+          <small><%= image_tag 'logo01.png' %></small>
+        <% end %>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li class="login-li">
+            <%= link_to home_login_path do %>
+              <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Login
+            <% end %>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <!-- /.Landing Page Navbar -->
+  <section class='banner'>  
+    <div class='container banner_content'> 
+      <div class="row">
+        <div class="col-md-8">
+          <div class="banner_content_inner">
+            <h1>Providing seamless communication between parents and school community</h1>
+            <%= link_to "Get Started Free Today", new_school_path, :class => 'btn btn-default btn_get_started' %>
+          </div>
         </div>
-        <div class="container services-container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center img-align">
-                    <div class="service-box">
-                        <img class="img-services" src="/assets/school.jpg" height="42" width="42" >
-                        <h3>For Schools</h3>
-                        <hr class="primary-small">
-                        <p class="text-muted p-services">Manage your classrooms, schedule events, stay in touch with parents, and many more..</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center img-align">
-                    <div class="service-box">
-                        <img class="img-services" src="/assets/parents.jpg">
-                        <h3>For Parents</h3>
-                        <hr class="primary-small">
-                        <p class="text-muted p-services">Get your child's daily activity, able to communicate with teachers, and many more..</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center img-align">
-                    <div class="service-box">
-                        <img class="img-services" src="/assets/student.jpg">
-                        <h3>For Students</h3>
-                        <hr class="primary-small">
-                        <p class="text-muted p-services">Check class activities, scheduled events, and many more..</p>
-                    </div>
-                </div>
-                
-            </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container features_title">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">At Your Service</h2>
+          <hr class="primary">
         </div>
-
-
-        <div class="container-fluid-services">
-            <div class="row no-gutter">
-                <div class="col-lg-4 col-sm-6" style="background-image: url(assets/misc2.jpg); background-repeat: no-repeat; background-size: cover; height: 229px;">
-                    <a href="#" >
-                        
-
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6 img-responsive" style="background-image: url(assets/misc4.jpg); background-repeat: no-repeat; background-size: cover; height: 229px;">
-                    <a href="#" >
-                        
-
-                    </a>
-                </div>
-                <div class="col-lg-4 col-sm-6 img-responsive" style="background-image: url(assets/misc3.jpg); background-repeat: no-repeat; background-size: cover; height: 229px;">
-                    <a href="#" >
-                        
-
-                    </a>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="container services-container">
+      <div class="row services_row">
+        <div class="col-md-6 text-center">
+          <%= image_tag 'school.jpg', :class => 'img-services' %>
         </div>
-     </section>
-
-     <section id="contact">
-        <div class="container">
-          <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Let's Get In Touch!</h2>
-                    <hr class="primary">
-                    <p> That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
-                </div> 
-                </div>
-                    <div class="row row-contact">
-                       
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="column4">
-                                <span class="icon"><i class="glyphicon glyphicon-home"></i></span>
-                                <span class="title">Mail</span>
-                                <p>5131 Post Rd <br>Dublin, OH 43016</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="column4">
-                                <span class="icon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <span class="title">Email</span>
-                                <p><a href="mailto:schoolapp@dsiginc.com">schoolapp@dsiginc.com</a></p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="column4">
-                                <span class="icon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                <span class="title">Contact</span>
-                                <p>(614).932.1458</p>
-                            </div>
-                        </div>
-                    </div>
-               
-            
+        <div class="col-md-6 text-center">
+          <h3>For Schools</h3>
+          <hr class="primary-small">
+          <p class="text-muted p-services">Manage your classrooms, schedule events, stay in touch with parents, and many more..</p>
+          <%= link_to 'Read More', '#', :class => 'btn btn-default' %>
         </div>
+      </div>
+      <div class='row services_row'>
+        <div class="col-md-6 text-center">
+          <h3>For Parents</h3>
+          <hr class="primary-small">
+          <p class="text-muted p-services">Get your child's daily activity, able to communicate with teachers, and many more..</p>
+          <%= link_to 'Read More', '#', :class => 'btn btn-default' %>
+        </div>
+        <div class="col-md-6 text-center">
+          <%= image_tag 'parents.jpg', :class => 'img-services' %>
+        </div>
+      </div>
+      <div class='row services_row'>
+        <div class="col-md-6 text-center">
+          <%= image_tag 'student.jpg', :class => 'img-services' %>
+        </div>
+        <div class="col-md-6 text-center">
+          <h3>For Students</h3>
+          <hr class="primary-small">
+          <p class="text-muted p-services">Check class activities, scheduled events, and many more..</p>
+          <%= link_to 'Read More', '#', :class => 'btn btn-default' %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="owl-carousel">
+    <div><%= link_to image_tag('misc2.jpg'), '#' %></div>
+    <div><%= link_to image_tag('misc4.jpg'), '#' %></div>
+    <div><%= link_to image_tag('misc3.jpg'), '#' %></div>
+  </div>
+
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <h2 class="section-heading">Let's Get In Touch!</h2>
+          <hr class="primary">
+          <p> That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+        </div> 
+      </div>
+      <div class="row row-contact">
+                   
+        <div class="col-lg-4 col-sm-6">
+          <div class="column4">
+            <span class="icon"><i class="glyphicon glyphicon-home"></i></span>
+            <span class="title">Mail</span>
+            <p>5131 Post Rd <br>Dublin, OH 43016</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="column4">
+            <span class="icon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <span class="title">Email</span>
+            <p><a href="mailto:schoolapp@dsiginc.com">schoolapp@dsiginc.com</a></p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="column4">
+            <span class="icon"><i class="glyphicon glyphicon-earphone"></i></span>
+            <span class="title">Contact</span>
+            <p>(614).932.1458</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
        
-        <!-- Footer -->
-        <%= render 'home/footer' %>
-        <!-- / Footer -->
+<!-- Footer -->
+<%= render 'home/footer' %>
+<!-- / Footer -->
 
-    </section>
 
      
