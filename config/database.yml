@@ -25,9 +25,9 @@ test:
   
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: twitter_school_development
   pool: 5
-  username: root
-  password: root123
+  # username: root
+  # password: root123
