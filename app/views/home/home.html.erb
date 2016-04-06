@@ -1,5 +1,3 @@
-
-<body class="landing-body">
   <!-- Landing Page Navbar -->
   <nav class="navbar navbar-default navbar-fixed-top custom-nav-bar">
     <div class="container">
@@ -11,9 +9,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
+        <!-- 
         <%= link_to root_path, :class => "navbar-brand" do %>
           <small><%= image_tag 'logo01.png' %></small>
-        <% end %>
+        <% end %> -->
+
+        <%= link_to 'Juntos', root_path, :class => "navbar-brand" %>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -129,9 +130,7 @@
         </div>
       </div>
     </div>
-  </section>
-</body>
-       
+  </section>       
 <!-- Footer -->
 <%= render 'home/footer' %>
 <!-- / Footer -->

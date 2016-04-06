@@ -2,7 +2,7 @@
 	padding: 0px;
 }
 // Landing Page Stylesheet
-body.landing-body{
+body{
 	.custom-nav-bar{
 		min-height: auto;
 		height: auto;
@@ -13,7 +13,10 @@ body.landing-body{
 			margin-top: 0px;
 			.navbar-header{
 				.navbar-brand{
-					height: auto;
+					height: 50px;
+					line-height: 50px;
+					color: #fff;
+					text-transform: uppercase;
 				}
 			}
 		}

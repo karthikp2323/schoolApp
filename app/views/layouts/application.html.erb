@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>School Tweet</title>
-      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-      <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <meta name="description" content="Juntos School Application" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>School Tweet</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
   </head>
+
   <body>
-
-     <% if session[:school_id] || session[:parent_id] %>
-     <%= render 'layouts/navbar' %>
-     <% end %>
-      <!-- <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p> -->
-     <% if session[:school_id] || session[:parent_id] %>    
-        <div class="main-container container-fluid">
-          <div >
-	           <div id="sidebar" class="page-sidebar sidebar-after-login" >
-		            <%= render 'layouts/sidebar' %> 
-             </div>
-  
-                <div class="page-content">
-        
-                  <!-- <div class="page-breadcrumbs"></div> -->
-                  <div class="page-body">
-              		  <%= yield %>
-              		</div><!-- div page-body -->
-                </div>
-
-          </div> <!-- div page-container -->
-        </div><!-- div main-container -->
-      
-  <% else %>
-       <div class="page-body">
+    <% if session[:school_id] || session[:parent_id] %>
+      <%= render 'layouts/navbar' %>
+    <% end %>
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
+    <% if session[:school_id] || session[:parent_id] %>    
+      <div class="main-container container-fluid">
+        <div >
+          <div id="sidebar" class="page-sidebar sidebar-after-login" >
+            <%= render 'layouts/sidebar' %> 
+          </div>
+          <div class="page-content">
+            <!-- <div class="page-breadcrumbs"></div> -->
+            <div class="page-body">
+        		  <%= yield %>
+        		</div><!-- div page-body -->
+          </div>
+        </div> <!-- div page-container -->
+      </div><!-- div main-container -->
+    <% else %>
+      <div class="page-body">
         <%= yield %>
-       </div>
-
-  <% end %>
-
-</body>
+      </div>
+    <% end %>
+  </body>
 </html>

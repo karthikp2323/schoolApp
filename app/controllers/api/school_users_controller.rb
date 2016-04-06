@@ -3,8 +3,8 @@ class Api::SchoolUsersController < ApplicationController
 	
 
 def index
-		render json: SchoolUser.where("school_id = ? AND role_id = ?", params[:school_id], 2).order("created_at DESC")
-	end
+	render json: SchoolUser.where("school_id = ? AND role_id = ?", params[:school_id], 2).order("created_at DESC")
+end
 
 
 def getClassList
