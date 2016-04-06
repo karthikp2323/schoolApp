@@ -10,7 +10,7 @@ development:
   database: twitter_school_development
   pool: 5
   username: root
-  password: root123
+  password: admin
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -18,10 +18,10 @@ development:
 test:
   adapter: mysql2
   encoding: utf8
-  database: twitter_school_development
+  database: twitter_school_test
   pool: 5
   username: root
-  password: root123
+  password: admin
   
 
 production:

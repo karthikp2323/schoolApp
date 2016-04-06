@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(version: 20160324144602) do
     t.string   "contact",    limit: 255
     t.string   "login_id",   limit: 255
     t.string   "password",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", force: :cascade do |t|
