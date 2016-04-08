@@ -13,28 +13,9 @@
 }
 
 .page-body{
-	background: #FFFFFF
+	//background: #FFFFFF
 }
 
-.page-breadcrumbs{
-    margin-top: 61px;
-    margin-left: -20px;
-
-    background-color: #FFF;
-    position: fixed;
-    min-width: 100%;
-}
-
-.page-breadcrumbs h{
-    margin-left: 15px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-}
-.page-breadcrumbs a:hover{
-    background-color: transparent;
-    color: black;
-}
 
 //Landing page settings
 
@@ -169,7 +150,7 @@ hr {
     padding-left: 0px;
 }
 .col-sm-6 {
-    width: 33%;
+  //  width: 33%;
 }
 .no-gutter {
     margin-left: -35px;
@@ -311,8 +292,6 @@ footer{
 .hr-activities{
     border-color: #f4b400;
     border-width: 1px;
-    margin-left: 4px;
-    width: 520px;
 }
 .widget-footer{
     background-color: white;
@@ -329,10 +308,10 @@ footer{
 }
 .widget-header{
     font-family: 'Raleway', sans-serif;
-    font-size: 16px;
+    // font-size: 16px;
     text-align: left;
     box-shadow: 0 1px 0 0 #999;
-    padding: 10px;
+    // padding: 10px;
     font-weight: 600;
     
 }
@@ -454,8 +433,7 @@ footer{
     background-color: white;
     padding: 100px;
     border-style: solid;
-    margin-top: 110px;
-    
+    // margin-top: 110px;
     border-width: 1px;
     
 }

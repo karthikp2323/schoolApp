@@ -1,74 +1,63 @@
 <div class="page-breadcrumbs">
-  <h> <a href="/school_users/schoolUserHomeView"> Home </a> / <%= @classname %>   </h>
+  <ul class="breadcrumb">
+    <li>
+        <i class="fa fa-home"></i>
+        <%= link_to 'Home', '#' %>
+    </li>
+    <!-- <li class="active"><%= @classname %></li> -->
+  </ul>
 </div>
 
-<div class="col-lg-12 col-sm-12 col-sm-12 activity-header"> <!-- div main-->
+<div class="page-body">
+  <div class="row">
 
-  <div class ="row"> <!-- div main row-->
+    <div class="col-lg-12 col-sm-12 col-sm-12"> <!-- div main-->
+
+      <div class ="row"> <!-- div main row-->
         <% if session[:role_type] == "Teacher" || session[:role_type] == "Admin" %>
           <%= render 'form' %>
         <% end %>
-      
-      <% if session[:role_type] == "Teacher" %>
-        <div class="col-lg-6 col-sm-6 col-sm-6 list-box">
-            <!-- Widget to display list of classes for teacher-->
-          <div class="widget-header  widget-for-user">
-            <div class="profile__image">
-              <a href="#"><%= session[:initials] %></a>
+          
+        <% if session[:role_type] == "Teacher" %>
+          <div class="col-lg-6 col-sm-6 col-sm-6 list-box">
+              <!-- Widget to display list of classes for teacher-->
+            <div class="widget-header  widget-for-user">
+              <div class="profile__image">
+                <a href="#"><%= session[:initials] %></a>
+              </div>
+            </div>
+
+
+            <div class="widget-body widget-classes-body">
+                <div class="row row-specs-header"> 
+                  <span class="caption-align-center">Actions </span> 
+                </div>
+                  
+                <div class="row">
+                  <div class="col-sm-6 col-user-specs">
+                    <a href='/students?classroomId=<%= @classroom_id %>&classname=<%= @classname %>'>
+                    <span class="menu-text"> Manage students </span></a>
+                  </div>
+                </div>
             </div>
           </div>
+        <% end %>
 
+      </div> <!-- EOF div main row-->
 
-          <div class="widget-body widget-classes-body">
-              <div class="row row-specs-header"> <span class="caption-align-center">Actions </span> </div>
-                
-                   <div class="row">
-                      <div class="col-sm-6 col-user-specs">
-
-                             <a href='/students?classroomId=<%= @classroom_id %>&classname=<%= @classname %>'>
-                             <span class="menu-text"> Manage students </span></a>
-                                            
-                      </div>
-                   </div>
-          </div>
-        </div>
-      <% end %>
-
-  </div> <!-- EOF div main row-->
-
-        <div id="avtivities" class="row" style="margin-top: 0px; margin-left: 0px;">
-           <%= render 'activity' %>
-        </div>
-          
-        <div class="row">
-          <%= will_paginate @activities%>  
-        </div>
-</div> <!-- EOF div main-->
+      <div id="avtivities" class="row" >
+         <%= render 'activity' %>
+      </div>
+        
+      <div class="row">
+        <%= will_paginate @activities%>  
+      </div>
+    </div> <!-- EOF div main-->
+  </div>
+</div>
 
 
 <!-- <div id="divChat">
 <%#= render 'message', locals: {activities: @activitiesNew} %>
 </div>
 <%#= link_to 'Back', {controller: "home", action: "home"} %> -->
-<script type="text/javascript">
-
-    jQuery(function() {
-      
-      if ($('.pagination').length) {
-
-        $(window).scroll(function() {
-          var url;
-          url = $('.pagination .next_page').attr('href');
-
-            if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 40 && window.location.pathname == "/activities/new") 
-            {
-              $('.pagination').text("Fetching more activities...");
-              return $.getScript(url);
-            }
-        });
-        return $(window).scroll();
-      }
-
-    });
-
-</script>

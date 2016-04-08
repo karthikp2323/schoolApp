@@ -1,54 +1,61 @@
 <div class="page-breadcrumbs">
-  <% if session[:role_type] == "Admin" %>
-  <h> <a href="/activities/new"> Home </a> / <a href="/events"> Events </a> 
-  <% else %>
-  <h> <a href="/school_users/schoolUserHomeView"> Home </a> / <a href="/events"> Events </a> 
+  <ul class="breadcrumb">
+    <% if session[:role_type] == "Admin" %>
+      <li>
+        <i class="fa fa-home"></i>
+        <%= link_to 'Home', new_activity_path %>
+      </li>
+      <li class="active"><%= link_to 'Events', '#' %></li>
+    <% else %>
+      <li>
+        <i class="fa fa-home"></i>
+        <%= link_to 'Home', school_users_schoolUserHomeView_path %>
+      </li>
+      <li class="active"><%= link_to 'Events', '#' %></li>
     <% end %>
+  </ul>
 </div>
   
-  
-<div class="div-upcoming-events">
-</br>
-    <div id="calendar" class="calendar-upcoming-events"></div>
+<div class="page-body">
+  <div class="row">
+    <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+      <div class="div-upcoming-events">
+        <div id="calendar" class="calendar-upcoming-events"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-
-$(document).ready(function() {
+  $(document).ready(function() {
     
     $('#calendar').fullCalendar({
-        defaultView: 'agendaWeek',
-        events: '/events.json',
-        height: 480,
-
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,oneweek,day' // buttons for switching between views
+      defaultView: 'agendaWeek',
+      events: '/events.json',
+      height: 480,
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,oneweek,day' // buttons for switching between views
+      },
+      views: {
+        month: {
+            type: 'agenda',
+            duration: { days: 30 },
+            buttonText: 'Month'
         },
-
-        views: {
-            month: {
-                type: 'agenda',
-                duration: { days: 30 },
-                buttonText: 'Month'
-            },
-            oneweek: {
-                type: 'agenda',
-                duration: { days: 7 },
-                buttonText: 'Week'
-            },
-            day: {
-                type: 'agenda',
-                duration: { days: 1 },
-                buttonText: 'Day'
-            }
+        oneweek: {
+            type: 'agenda',
+            duration: { days: 7 },
+            buttonText: 'Week'
         },
-        eventClick: function(event, jsEvent, view) {
-          
-            
+        day: {
+            type: 'agenda',
+            duration: { days: 1 },
+            buttonText: 'Day'
         }
+      },
+      eventClick: function(event, jsEvent, view) {}
     });
-
-});
+  });
 </script>

@@ -1,179 +1,154 @@
-
-
 <% if session[:role_type] == "Admin" %>
-<div class="page-breadcrumbs">
-  <h> <a href="/activities/new"> Home </a> / Manage Teachers </h>
-</div>
+  <div class="page-breadcrumbs">
+    <ul class="breadcrumb">
+      <li>
+        <i class="fa fa-home"></i>
+        <%= link_to 'Home', new_activity_path %>
+      </li>
+      <li class="active"><%= link_to 'Manage Teachers', '#' %></li>
+    </ul>
+  </div>
 <% else %>
 
 <% end %>
 
-<p id="notice"><%= notice %></p>
-
-
-<div class="col-xs-12 col-md-12 div-teacher-list" style="margin-top: 115px;">
-  
-  <div class="widget">
-
-  <div class="widget-header bordered-bottom bordered-blue">
-                <span >Teacher's List</span>
-                <div class="widget-buttons" style="float: right">
-                    
-                     <button type="button" class="btn btn-default" onclick="manageTeacher('new')" style="margin-top: -18px;"> Add Teacher </button>
-                </div>
-            </div>
-  <div class="widget-body">
-    <table id="teacherDataTable">
-
-      <thead>
-        <tr role="row">
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Email</th>
-          <th>Contact</th>
-          
-          
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @school_users.each do |school_user| %>
-          <tr id="<%= school_user.id %>">
-            <td><%= school_user.first_name %></td>
-            <td><%= school_user.last_name %></td>
-            <td><%= school_user.email_id %></td>
-            <td><%= school_user.contact %></td>
-            <td> 
-               <button type="button" class="btn btn-info btn-xs" onclick="manageTeacher(<%= school_user.id %>)"> Edit </button>
-
-             
-              <%= link_to 'Delete ', school_user, method: :delete, data: { confirm: 'Are you sure, all of his/her data will also be removed?' }, class: 'btn btn-info btn-xs' %>
-              
-              <button type="button" class="btn btn-info btn-xs glyphicon glyphicon-plus" onclick="addClassToTeacher('<%= school_user.first_name %> <%= school_user.last_name %>', '<%= school_user.id %>')"> Class </button>
-
-              <button type="button" class="btn btn-info btn-xs glyphicon glyphicon-eye-open" onclick="getClasses(<%= school_user.id %>)"> Classes </button>
-              
-              
-            <%# <td><%= link_to 'Show', school_user ></td> %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div><!-- End div widget-body
-  <%= will_paginate @school_users %> -->
-</div>
-</div>
-<br>
+<div class="page-body">
+  <div class="row">
+    <p id="notice"><%= notice %></p>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="widget">
+        <div class="widget-header bordered-bottom bordered-blue">
+          <span class='widget-caption'>Teacher's List</span>
+          <div class="widget-buttons custom-widget-buttons">
+            <button type="button" class="btn btn-default" onclick="manageTeacher('new')">Add Teacher</button>
+          </div>
+        </div>
+        <div class="widget-body">
+          <table id="teacherDataTable">
+            <thead>
+              <tr role="row">
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @school_users.each do |school_user| %>
+                <tr id="<%= school_user.id %>">
+                  <td><%= school_user.first_name %></td>
+                  <td><%= school_user.last_name %></td>
+                  <td><%= school_user.email_id %></td>
+                  <td><%= school_user.contact %></td>
+                  <td> 
+                    <button type="button" class="btn btn-info btn-xs" onclick="manageTeacher(<%= school_user.id %>)"> Edit </button>
+                    <%= link_to 'Delete ', school_user, method: :delete, data: { confirm: 'Are you sure, all of his/her data will also be removed?' }, class: 'btn btn-info btn-xs' %>                      
+                    <button type="button" class="btn btn-info btn-xs glyphicon glyphicon-plus" onclick="addClassToTeacher('<%= school_user.first_name %> <%= school_user.last_name %>', '<%= school_user.id %>')"> Class </button>
+                    <button type="button" class="btn btn-info btn-xs glyphicon glyphicon-eye-open" onclick="getClasses(<%= school_user.id %>)"> Classes </button>
+                    <%# <td><%= link_to 'Show', school_user ></td> %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div><!-- End div widget-body
+        <%= will_paginate @school_users %> -->
+      </div>
+    </div>
 
 <!-- <%= link_to 'Back To Home', {controller: "home", action: "home"} %> -->
-<script>
+    <script>
   
-  $(document).ready(function(){
+      jQuery(document).ready(function($){
 
-    $("#dialog_teacher").hide();
-    $("#dialog_add_class").hide();
-    $("#dialog_get_classes").hide(); 
+        $("#dialog_teacher").hide();
+        $("#dialog_add_class").hide();
+        $("#dialog_get_classes").hide(); 
 
-    jQuery(function() {
-            return $("#teacherDataTable").dataTable({
-              
-            });
-    });    
-    
-  });
+        // $(function() {
+        //   return $("#teacherDataTable").dataTable({});
+        // });    
+        $("#teacherDataTable").dataTable();
+      });
 
-
-
-
-
-    function manageTeacher(teacherId){
-     // console.log("In manageTeacher:" + teacherId);
+      function manageTeacher(teacherId){
+       // console.log("In manageTeacher:" + teacherId);
         $("#btn_add_teacher").prop("disabled",false);
         $("#new_school_user")[0].reset();
         $("#lbl_success_message").html("");
         $("#lbl-error-message").hide();
 
-      if (teacherId == 'new') {
-        var title = "Add Teacher";
-        $('input[id=txt_edit_or_save]').val("add");
-      }
-      else{
-        var title = "Edit Teacher";
-        $('input[id=school_user_first_name').val($("#"+teacherId).find("td")[0].innerText);
-        $('input[id=school_user_last_name]').val($("#"+teacherId).find("td")[1].innerText);
-        $('input[id=school_user_email_id]').val($("#"+teacherId).find("td")[2].innerText);
-        $('input[id=school_user_contact]').val($("#"+teacherId).find("td")[3].innerText);
-        $('input[id=txt_edit_or_save]').val("edit");
-        $('input[id=school_user_id]').val(teacherId);
-        $('input[id=school_user_school_id]').val(<%= session[:school_id] %>);
-      }
-      
-
-      
-      $("#dialog_teacher").dialog({
-            maxHeight: 500,
-            width: 570,
-            title: title,
-            position: { my: "center", at: "center", of: ".div-teacher-list" },
-            modal: true,
-            buttons: {
-              Close: function() {
-                $( this ).dialog( "close" );
-              }
+        if (teacherId == 'new') {
+          var title = "Add Teacher";
+          $('input[id=txt_edit_or_save]').val("add");
+        } else{
+          var title = "Edit Teacher";
+          $('input[id=school_user_first_name').val($("#"+teacherId).find("td")[0].innerText);
+          $('input[id=school_user_last_name]').val($("#"+teacherId).find("td")[1].innerText);
+          $('input[id=school_user_email_id]').val($("#"+teacherId).find("td")[2].innerText);
+          $('input[id=school_user_contact]').val($("#"+teacherId).find("td")[3].innerText);
+          $('input[id=txt_edit_or_save]').val("edit");
+          $('input[id=school_user_id]').val(teacherId);
+          $('input[id=school_user_school_id]').val(<%= session[:school_id] %>);
+        }
+        $("#dialog_teacher").dialog({
+          maxHeight: 500,
+          width: 570,
+          title: title,
+          position: { my: "center", at: "center", of: ".div-teacher-list" },
+          modal: true,
+          buttons: {
+            Close: function() {
+              $( this ).dialog( "close" );
             }
-      });
+          }
+        });
+      };
 
-    };
-
-  function addClassToTeacher(teacherName, teacherId){
-    //console.log(teacherName,teacherId);
-    $("#lblteacherName").html('Teacher: ' + teacherName);
-    $("#classroom_school_user_id").attr("value",teacherId);
-    $("#lbl_success_add_class_message").html("");
-    $("#btn_add_class").prop("disabled",false);
-    $('input[id=txt_edit_or_save]').val("add");
-    $("#new_classroom")[0].reset();
-    
+      function addClassToTeacher(teacherName, teacherId){
+        //console.log(teacherName,teacherId);
+        $("#lblteacherName").html('Teacher: ' + teacherName);
+        $("#classroom_school_user_id").attr("value",teacherId);
+        $("#lbl_success_add_class_message").html("");
+        $("#btn_add_class").prop("disabled",false);
+        $('input[id=txt_edit_or_save]').val("add");
+        $("#new_classroom")[0].reset();
+        
 
         $("#dialog_add_class").dialog({
-            maxHeight: 500,
-            width: 670,
-            title: "Add Class",
-            position: { my: "center", at: "center", of: ".div-teacher-list" },
-            modal: true,
-            buttons: {
-              Close: function() {
-                $( this ).dialog( "close" );
-              }
+          maxHeight: 500,
+          width: 670,
+          title: "Add Class",
+          position: { my: "center", at: "center", of: ".div-teacher-list" },
+          modal: true,
+          buttons: {
+            Close: function() {
+              $( this ).dialog( "close" );
             }
+          }
+        });
+      };
+
+      function getClasses(teacherId){
+        $('#lbl_message_for_getclasses').html("");
+        $('#tableClassList').html("");
+        $.ajax({
+          method: "GET",
+          url: "/classrooms/getClassesForTeacher",
+          data: {user_id: teacherId}
+        })
+        .done(function(data){
+          if(data.length == 0)
+          {
+            $('#lbl_message_for_getclasses').html("No Classes Assigned");
+          }
+
+          $.each( data, function(index) {
+            $('#tableClassList').append('<tr><td > <h4> '+data[index].class_name +'</h4> \n '+ data[index].class_level +' <i class="glyphicon glyphicon-map-marker"></i> '+  data[index].class_location+' </td></tr>');
           });
 
- 
-  };
-
-  function getClasses(teacherId){
-    $('#lbl_message_for_getclasses').html("");
-    $('#tableClassList').html("");
-      $.ajax({
-        method: "GET",
-        url: "/classrooms/getClassesForTeacher",
-        data: {user_id: teacherId}
-      })
-      .done(function(data){
-        if(data.length == 0)
-        {
-          $('#lbl_message_for_getclasses').html("No Classes Assigned");
-        }
-
-              $.each( data, function(index) {
-
-              $('#tableClassList').append('<tr><td > <h4> '+data[index].class_name +'</h4> \n '+ data[index].class_level +' <i class="glyphicon glyphicon-map-marker"></i> '+  data[index].class_location+' </td></tr>');
-              
-            });
-
-              $("#dialog_get_classes").dialog({
+          $("#dialog_get_classes").dialog({
             maxHeight: 500,
             width: 370,
             title: "Classes Assigned",
@@ -186,13 +161,9 @@
             }
           });
 
-      });
-  };
-
-
-
-  </script>
-
+        });
+      };
+    </script>
 
     <div id="dialog_teacher" >
       <%= render 'form' %>
@@ -205,5 +176,6 @@
     <div id="dialog_get_classes" >
       <%= render 'classeslistforuser' %>
     </div>
-
+  </div>
+</div>
  

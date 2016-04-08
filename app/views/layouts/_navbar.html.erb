@@ -1,18 +1,21 @@
 <!-- Navbar -->
-    <div class="navbar-after-login navbar">
+    <div class="navbar navbar-fixed-top admin-navbar">
         <div class="navbar-inner">
             <div class="navbar-container">
                 <!-- Navbar Barnd -->
                 <div class="navbar-header pull-left">
-                    <a href="#" class="navbar-brand">
+                    <!-- <a href="#" class="navbar-brand">
                         <small>
                             <img src="/assets/logo01.png" alt="" />
                         </small>
-                    </a>
+                    </a> -->
+                    <%= link_to 'Juntos', root_path, :class => "navbar-brand" %>
                 </div>
                 <!-- /Navbar Barnd -->
                 <!-- Sidebar Collapse -->
-                
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
                 <!-- /Sidebar Collapse -->
                 <!-- Account Area and Settings -->
                 <div class="navbar-header pull-right">
@@ -26,7 +29,7 @@
                                     </div>
                                     <section>
                                         <% if session[:username]  %>
-                                        <h2><span class="profile"><span><%= session[:username] %></span></span></h2>
+                                          <h2><span class="profile"><span><%= session[:username] %></span></span></h2>
                                         <% end %>
                                     </section>
                                 </a>

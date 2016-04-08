@@ -11,18 +11,40 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
+//= require jquery_ujs
 //= require jquery-ui/dialog
 //= require jquery-ui/autocomplete
-//= require jquery_ujs
 //= require jquery.remotipart
-//= require turbolinks
-//= require_tree .
+//= require bootstrap-sprockets
 //= require moment
 //= require fullcalendar
 //= require dataTables/jquery.dataTables
+//= require turbolinks
+//= require jquery.turbolinks
+//= require_tree .
 
-
-
-
-
+jQuery(document).ready(function($){
+	$(function() {
+	  if ($('.pagination').length) {
+	    $(window).scroll(function() {
+	      var url;
+	      url = $('.pagination .next_page').attr('href');
+	        if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 40 && window.location.pathname == "/activities/new") 
+	        {
+	          $('.pagination').text("Fetching more activities...");
+	          return $.getScript(url);
+	        }
+	    });
+	    return $(window).scroll();
+	  }
+	});	
+	$('#sidebar-collapse').click(function(){
+		if($(this).hasClass('active')){
+			$('#sidebar').removeClass('menu-compact');
+			$(this).removeClass('active');
+		} else {
+			$('#sidebar').addClass('menu-compact');
+			$(this).addClass('active');
+		}
+	});
+});

@@ -1,43 +1,26 @@
-
 <% @activities.each do |activity| %>
-<div class="activities-width">
-	
-	<div class="widget-header  ">
-	     <span> <h> <%= activity.title %>  </h></span> </br>
-	    <p> <span class="glyphicon glyphicon-time"></span> <%= time_ago_in_words(activity.created_at) %> ago  &nbsp; &nbsp; <span class="glyphicon glyphicon-user"></span> By: <%= activity.school_user.first_name %> </p> 
-	
-	</div>
-
-
-    <div class="widget">
-	  <div class="widget-body">
-		
-		 <div>
-			<% if activity.image.url.include? "assets/products" %>
-				<div class="row"> 
-			        <div class="col-md-6">
-			           <div class="form-group">
-			              <span class="input-icon icon-right">
-			                 <%= image_tag activity.image.url, {:id => 'imageActivity'} %>  
-			                     
-			               </span>
-			            </div>
-			        </div>       
-			      </div>
-		     	   <hr class="hr-activities">	
-		      <% end %>
-
-		 </div>
-
-			<p>
-			    <%= activity.message %>
-	        </p>
-	        
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+		<div class='widget'>
+			<div class="widget-header">
+			  <span class='widget-caption'><h><%= activity.title %></h></span> 
+	     	<div class='widget-buttons custom-widget-buttons'>
+	  	   	<span class="glyphicon glyphicon-time"></span> 
+	  	   	<%= time_ago_in_words(activity.created_at) %> ago  &nbsp; &nbsp; 
+	  	   	<span class="glyphicon glyphicon-user"></span> By: 
+	  	   	<%= activity.school_user.first_name %> 
+	  	  </div>
+			</div>
+	  	<div class="widget-body">
+				<% if activity.image.url.include? "assets/products" %>
+          <div class="widget_image">
+            <%= image_tag activity.image.url, :class => 'imageActivity' %>
+          </div>
+	     	  <hr class="hr-activities">	
+	      <% end %>
+				<p><%= activity.message %></p> 
+	  	</div>
 	  </div>
-    </div>
-
-</div>
-
+	</div>
 <% end %>
 
 

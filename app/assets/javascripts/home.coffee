@@ -11,3 +11,7 @@ jQuery(document).ready ($) ->
       600: items: 2
       1000: items: 3
   return
+  $('#sidebar-collapse').click ->
+	  $('#sidebar').addClass 'menu-compact'
+	  $(this).addClass 'active'
+	  return

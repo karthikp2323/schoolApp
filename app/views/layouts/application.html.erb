@@ -13,27 +13,35 @@
   </head>
 
   <body>
+    <!-- Loading Container -->
+    <!-- <div class="loading-container">
+        <div class="loader"></div>
+    </div> -->
+    <!--  /Loading Container -->
     <% if session[:school_id] || session[:parent_id] %>
       <%= render 'layouts/navbar' %>
     <% end %>
     <!-- <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> -->
     <% if session[:school_id] || session[:parent_id] %>    
-      <div class="main-container container-fluid">
-        <div >
-          <div id="sidebar" class="page-sidebar sidebar-after-login" >
+      <div class="main-container container-fluid admin-container">
+        <div class="page-container">
+          <div id="sidebar" class="page-sidebar" >
             <%= render 'layouts/sidebar' %> 
+          </div>
+          <div id="chatbar" class="page-chatbar">
+            <%= render 'layouts/chatbar' %> 
           </div>
           <div class="page-content">
             <!-- <div class="page-breadcrumbs"></div> -->
-            <div class="page-body">
+            <!-- <div class="page-body"> -->
         		  <%= yield %>
-        		</div><!-- div page-body -->
+        		<!-- </div> -->
           </div>
         </div> <!-- div page-container -->
       </div><!-- div main-container -->
     <% else %>
-      <div class="page-body">
+      <div class="front-page-body">
         <%= yield %>
       </div>
     <% end %>

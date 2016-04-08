@@ -27,6 +27,7 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -69,6 +70,8 @@ gem 'bcrypt', '~> 3.1.7'
 #gem for evevt calendar
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+
+gem 'font-awesome-sass'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

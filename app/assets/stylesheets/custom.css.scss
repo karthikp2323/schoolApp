@@ -1,9 +1,25 @@
-.page-body{
-	padding: 0px;
-}
+@import 'bootstrap';
+@import 'bootstrap-sprockets';
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 // Landing Page Stylesheet
 body{
 	font-family: "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+	.admin-container{
+		padding: 0px;
+	}
+	.admin-navbar{
+		margin: 0px;
+		border: 0px;
+		height: auto;
+		.navbar-inner{
+			min-height: 45px;
+		}
+	}
+	.front-page-body{
+		padding: 0px;
+	}
 	.custom-nav-bar{
 		min-height: auto;
 		height: auto;
@@ -97,5 +113,31 @@ body{
 	}
 	footer{
 		margin: 0px;
+	}
+	.page-content{
+		.page-breadcrumbs{
+			.breadcrumb{
+				margin-bottom: 0px;
+			}
+		}
+	}
+	.custom-widget-buttons{
+		float: right;
+	}
+	.widget_image{
+		img{
+			width: 100%;
+			height: auto;
+		}
+	}
+	.dataTables_wrapper{
+		.dataTables_filter{
+			// float: left;
+			label{
+				&:before{
+					left: 62px;
+				}
+			}
+		}
 	}
 }

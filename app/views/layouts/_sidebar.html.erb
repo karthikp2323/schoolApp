@@ -1,88 +1,90 @@
 
-                <!-- Page Sidebar Header-->
-                <div class="sidebar-header-wrapper">
-                    <input type="text" class="searchinput" />             
-                </div>
-                
-                <!-- /Page Sidebar Header -->
-                <!-- Sidebar Menu -->
-                <ul class="nav sidebar-menu">
-                
-                <% if session[:role_type] == "Admin"%>   
-                    <li >
-                        <a href="/activities/new">
-                        <i class="menu-icon glyphicon glyphicon-home"></i>
-                        <span class="menu-text"> Home </span></a>
-                    </li>
+<!-- Page Sidebar Header-->
+<div class="sidebar-header-wrapper">
+    <input type="text" class="searchinput" />
+    <i class="searchicon fa fa-search"></i>
+    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>             
+</div>
 
-                    <!-- <li >
-                        <a href="/school_users/new">
-                        <i class="menu-icon glyphicon glyphicon-pencil"></i>
-                        <span class="menu-text"> Add Teacher </span></a>
-                    </li> -->
+<!-- /Page Sidebar Header -->
+<!-- Sidebar Menu -->
+<ul class="nav sidebar-menu">
 
-                    <li >
-                        <a href="/school_users">
-                        <i class="menu-icon glyphicon glyphicon-th-list"></i>
-                        <span class="menu-text"> Manage Teachers </span></a>
-                    </li>
-                  
-                    <li >
-                        <a href="/classrooms">
-                        <i class="menu-icon glyphicon glyphicon-th-list"></i>
-                        <span class="menu-text"> Manage Classes </span></a>
-                    </li>
-                     <li class="dropdown">
-                        <a href="/events">
-                        <i class="menu-icon glyphicon glyphicon-calendar"></i>
-                        <span class="menu-text"> UpComing Events </span></a>
-                    </li>
+<% if session[:role_type] == "Admin"%>   
+    <li >
+        <a href="/activities/new">
+        <i class="menu-icon glyphicon glyphicon-home"></i>
+        <span class="menu-text"> Home </span></a>
+    </li>
 
-                    <% elsif session[:role_type] == "Teacher"
-                        %>
-                
-                    <li class="dropdown">
-                        <a href="/school_users/schoolUserHomeView">
-                        <i class="menu-icon glyphicon glyphicon-home"></i>
-                        <span class="menu-text"> Home </span></a>
-                    </li>
-                        
-                        <% if session[:class_list] %>
-                        <li class="dropdown">
-                            <a href="/school_users/schoolUserHomeView">
-                            <i class="menu-icon glyphicon glyphicon-th-large"></i>
-                            <span class="menu-text"> My Classes </span></a>
-                        </li>
-                            <% session[:class_list].each do |class_list| %>
-                            <li style="margin-left: 20px;" >
-                                <a href="/activities/new?class_id=<%= class_list["id"] %>&classname=<%= class_list["class_name"] %>">
-                                <i class="menu-icon glyphicon glyphicon-blackboard"></i>
-                                <span class="menu-text"> <%= class_list["class_name"] %> </span></a>
-                            </li>
-                            <% end %>
-                        <% end %>
+    <!-- <li >
+        <a href="/school_users/new">
+        <i class="menu-icon glyphicon glyphicon-pencil"></i>
+        <span class="menu-text"> Add Teacher </span></a>
+    </li> -->
 
-                     <li class="dropdown">
-                        <a href="/events">
-                        <i class="menu-icon glyphicon glyphicon-calendar"></i>
-                        <span class="menu-text"> UpComing Events </span></a>
-                    </li>
+    <li >
+        <a href="/school_users">
+        <i class="menu-icon glyphicon glyphicon-th-list"></i>
+        <span class="menu-text"> Manage Teachers </span></a>
+    </li>
+  
+    <li >
+        <a href="/classrooms">
+        <i class="menu-icon glyphicon glyphicon-th-list"></i>
+        <span class="menu-text"> Manage Classes </span></a>
+    </li>
+     <li class="dropdown">
+        <a href="/events">
+        <i class="menu-icon glyphicon glyphicon-calendar"></i>
+        <span class="menu-text"> UpComing Events </span></a>
+    </li>
+
+    <% elsif session[:role_type] == "Teacher"
+        %>
+
+    <li class="dropdown">
+        <a href="/school_users/schoolUserHomeView">
+        <i class="menu-icon glyphicon glyphicon-home"></i>
+        <span class="menu-text"> Home </span></a>
+    </li>
+        
+        <% if session[:class_list] %>
+        <li class="dropdown">
+            <a href="/school_users/schoolUserHomeView">
+            <i class="menu-icon glyphicon glyphicon-th-large"></i>
+            <span class="menu-text"> My Classes </span></a>
+        </li>
+            <% session[:class_list].each do |class_list| %>
+            <li style="margin-left: 20px;" >
+                <a href="/activities/new?class_id=<%= class_list["id"] %>&classname=<%= class_list["class_name"] %>">
+                <i class="menu-icon glyphicon glyphicon-blackboard"></i>
+                <span class="menu-text"> <%= class_list["class_name"] %> </span></a>
+            </li>
+            <% end %>
+        <% end %>
+
+     <li class="dropdown">
+        <a href="/events">
+        <i class="menu-icon glyphicon glyphicon-calendar"></i>
+        <span class="menu-text"> UpComing Events </span></a>
+    </li>
 
 
-                    <% elsif session[:role_type] == "Parent"
-                        %>
-                    
-                    
-                    <li>
-                        <a href="/school_users/schoolUserHomeView">
-                        <i class="menu-icon glyphicon glyphicon-pencil"></i>
-                        <span class="menu-text"> Home </span></a>
-                    </li>
-              
-                        <%end%>
-                    
-                </ul>
-                <!-- /Sidebar Menu -->
+    <% elsif session[:role_type] == "Parent"
+        %>
+    
+    
+    <li>
+        <a href="/school_users/schoolUserHomeView">
+        <i class="menu-icon glyphicon glyphicon-pencil"></i>
+        <span class="menu-text"> Home </span></a>
+    </li>
+
+        <%end%>
+    
+</ul>
+<!-- /Sidebar Menu -->
 
 
 

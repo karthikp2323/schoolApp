@@ -162,6 +162,7 @@ function InitiateSideMenu() {
     //Sidebar Collapse
     var b = $("#sidebar").hasClass("menu-compact");
     $("#sidebar-collapse").on('click', function () {
+        console.log('I am clicked');
         if (!$('#sidebar').is(':visible'))
             $("#sidebar").toggleClass("hide");
         $("#sidebar").toggleClass("menu-compact");
