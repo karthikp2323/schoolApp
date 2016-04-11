@@ -6,6 +6,12 @@
 // Landing Page Stylesheet
 body{
 	font-family: "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+	a{
+	 &:hover{
+	 	text-decoration: none;
+	 	background: none;
+	 }
+	}
 	.admin-container{
 		padding: 0px;
 	}
@@ -15,6 +21,32 @@ body{
 		height: auto;
 		.navbar-inner{
 			min-height: 45px;
+		}
+		.navbar-brand{
+			padding: 0px;
+			line-height: 45px;
+			text-transform: uppercase;
+		}
+	}
+	.page-sidebar.menu-compact{
+		.sidebar-menu{
+			li{
+				&:hover{
+					.menu-text{
+						height: 50px;
+						line-height: 50px;
+					}
+				}
+			}
+		}
+	}
+	.page-breadcrumbs{
+		.breadcrumb{
+			li.active{
+				a{
+					color: #777;
+				}
+			}
 		}
 	}
 	.front-page-body{
@@ -139,5 +171,10 @@ body{
 				}
 			}
 		}
+	}
+	.ui-dialog{
+		top: 100px;
+		left: 50%;
+		margin-left: -285px;
 	}
 }

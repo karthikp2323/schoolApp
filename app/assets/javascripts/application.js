@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require turbolinks
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/dialog
 //= require jquery-ui/autocomplete
@@ -19,8 +21,6 @@
 //= require moment
 //= require fullcalendar
 //= require dataTables/jquery.dataTables
-//= require turbolinks
-//= require jquery.turbolinks
 //= require_tree .
 
 jQuery(document).ready(function($){
@@ -39,13 +39,14 @@ jQuery(document).ready(function($){
 	  }
 	});	
 	$('#sidebar-collapse').click(function(){
-		if($(this).hasClass('active')){
-			$('#sidebar').removeClass('menu-compact');
-			$(this).removeClass('active');
-		} else {
-			$('#sidebar').addClass('menu-compact');
-			$(this).addClass('active');
-		}
+		$('#sidebar').toggleClass('menu-compact');
+		$(this).toggleClass('active');
+	});
+
+	//Chat
+	$("#chat-link").click(function () {
+    $('.page-chatbar').toggleClass('open');
+    $(this).toggleClass('open');
 	});
 
 	$('.owl-carousel').owlCarousel({

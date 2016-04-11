@@ -2,12 +2,26 @@ class HomeController < ApplicationController
   before_action :clear_session, only: [:home, :logout]
 
   def terms
-
     render
   end  
 
   def home
 
+  end
+
+  def teachers
+
+  end
+
+  def parents
+
+  end
+
+  def daycares
+
+  end
+
+    
   end
 
   def login
