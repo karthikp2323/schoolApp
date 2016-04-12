@@ -27,6 +27,7 @@ var rtlchanger = document.getElementById('rtl-changer');
 
 if (location.pathname != "/index-rtl-fa.html" && location.pathname != "/index-rtl-ar.html") {
     if (readCookie("rtl-support")) {
+    // if (jQuery(document).cookie("rtl-support")) {
         switchClasses("pull-right", "pull-left");
         switchClasses("databox-right", "databox-left");
         switchClasses("item-right", "item-left");

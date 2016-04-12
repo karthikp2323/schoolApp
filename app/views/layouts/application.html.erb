@@ -42,7 +42,50 @@
       </div><!-- div main-container -->
     <% else %>
       <div class="front-page-body">
+        <!-- Landing Page Navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top custom-nav-bar">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <!-- 
+              <%= link_to root_path, :class => "navbar-brand" do %>
+                <small><%= image_tag 'logo01.png' %></small>
+              <% end %> -->
+
+              <%= link_to 'Juntos', root_path, :class => "navbar-brand" %>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to 'Schools & Daycares', daycares_summary_path %></li>
+                <li><%= link_to 'Teachers', teachers_summary_path %></li>
+                <li><%= link_to 'Parents', parents_summary_path %></li>
+                <li><%= link_to 'Features', root_path + "#features" %></li>
+                <li><%= link_to 'Contact', root_path + "#contact" %></li>
+                <li>
+                  <%= link_to home_login_path, :class => 'btn_login' do %>
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Login
+                  <% end %>
+                </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+        <!-- /.Landing Page Navbar -->
         <%= yield %>
+        <!-- Footer -->
+        <%= render 'home/footer' %>
+        <!-- / Footer -->
+
+
+             
       </div>
     <% end %>
   </body>

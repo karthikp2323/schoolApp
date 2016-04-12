@@ -17,6 +17,8 @@
 //= require jquery-ui/dialog
 //= require jquery-ui/autocomplete
 //= require jquery.remotipart
+//= require skins.min
+//= require jquery.slimscroll.min
 //= require bootstrap-sprockets
 //= require moment
 //= require fullcalendar

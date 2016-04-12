@@ -62,6 +62,11 @@ Rails.application.routes.draw do
   resources :events
   #resources :home
 
+  get 'teachers_summary', to: 'home#teachers'
+  get 'daycares_summary', to: 'home#daycares'
+  get 'parents_summary', to: 'home#parents'
+
+
   
 
 

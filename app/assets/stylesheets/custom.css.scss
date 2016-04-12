@@ -4,6 +4,11 @@
 @import "font-awesome";
 
 // Landing Page Stylesheet
+
+.auto-fill{
+	width: 100%;
+}
+
 body{
 	font-family: "HelveticaNeue", Helvetica, Arial, sans-serif !important;
 	a{
@@ -176,5 +181,30 @@ body{
 		top: 100px;
 		left: 50%;
 		margin-left: -285px;
+	}
+	.custom_tab_section{
+		.nav-tabs{
+			box-shadow: none;
+			li{
+				&.active{
+					a{
+						color: #f68a28;
+						border: none;
+						background: none;
+						box-shadow: none;
+						font-weight: bold;
+					}
+				}
+				a{
+					border: none;
+					font-size: 12px;
+				}
+			}
+		}
+		.tab-content{
+			background: none;
+			box-shadow: none;
+			padding: 30px 20px;
+		}
 	}
 }

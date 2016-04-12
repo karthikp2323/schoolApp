@@ -21,9 +21,6 @@ class HomeController < ApplicationController
 
   end
 
-    
-  end
-
   def login
 
   	render 
