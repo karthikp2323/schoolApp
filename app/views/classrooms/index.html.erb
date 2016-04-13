@@ -1,3 +1,4 @@
+<% provide(:title, 'Classes') %>
 <% if session[:role_type] == "Admin" %>
   <div class="page-breadcrumbs">
     <ul class="breadcrumb">
@@ -8,6 +9,26 @@
       <li class="active"><%= link_to 'Manage Classes', '#' %></li>
     </ul>
   </div>
+  <!-- Page Header -->
+  <div class="page-header position-relative">
+    <div class="header-title">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <!--Header Buttons-->
+    <div class="header-buttons">
+      <a class="sidebar-toggler" href="#">
+        <i class="fa fa-arrows-h"></i>
+      </a>
+      <a class="refresh" id="refresh-toggler" href="">
+        <i class="glyphicon glyphicon-refresh"></i>
+      </a>
+      <a class="fullscreen" id="fullscreen-toggler" href="#">
+        <i class="glyphicon glyphicon-fullscreen"></i>
+      </a>
+    </div>
+    <!--Header Buttons End-->
+  </div>
+  <!-- /Page Header -->
 <% else %>
 
 <% end %>
@@ -19,9 +40,18 @@
       <div class="widget">
         <div class="widget-header bordered-bottom bordered-blue">
           <span class='widget-caption'>List Of Classes</span>
+          <div class="widget-buttons custom-widget-buttons">
+            <a href="#" data-toggle="maximize">
+              <i class="fa fa-expand"></i>
+            </a>
+            <a href="#" data-toggle="collapse">
+              <i class="fa fa-minus"></i>
+            </a>
+          </div>
         </div>
+
         <div class="widget-body">
-          <table  id="classroomtable" >
+          <table id="classroomtable" class="table table-striped table-bordered table-hover">
             <thead>
               <tr >
                 <th>Class name</th>
@@ -29,7 +59,7 @@
                 <th>Class level</th>
                 <th>Teacher</th>
                 <th style="display:none;"></th>
-                <th ></th>
+                <th >Action</th>
               </tr>
             </thead>
 
@@ -42,12 +72,19 @@
                   
                   <td><%= classroom.school_user.first_name %> <%= classroom.school_user.last_name %></td>
                   <td style="display:none;"> <%= classroom.school_user.id %></td> 
-                  <td>
-                    <button type="button" class="btn btn-info btn-xs" onclick="editClass(<%= classroom.id %>)"> Edit </button>
-                    <%= link_to 'Delete ', classroom, method: :delete, data: { confirm: 'Are you sure to delete all of the class data?' }, class: 'btn btn-info btn-xs edit' %>
-                    <button type="button" class="btn btn-info btn-xs" onclick="addStudentDailog(<%= classroom.id %>)"> Add Students </button>
-                    <button type="button" class="btn btn-info btn-xs" onclick="getStudentList(<%= classroom.id %>)"> View Students </button>
-
+                  <td class='text-center action_buttons'>
+                    <%= link_to "javascript:editClass(#{classroom.id});" do  %>
+                      <i class='fa fa-pencil fa-2x'></i>
+                    <% end %>
+                    <%= link_to classroom, method: :delete, data: { confirm: 'Are you sure to delete all of the class data?' }, :class => 'edit' do %>
+                      <i class='fa fa-times-circle fa-2x'></i>
+                    <% end %>
+                    <%= link_to "javascript:addStudentDailog(#{classroom.id});" do %>
+                      <i class='fa fa-plus-circle fa-2x'></i>
+                    <% end %>
+                    <%= link_to "javascript:getStudentList(#{classroom.id});" do %>
+                      <i class='fa fa-eye fa-2x'></i>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>

@@ -27,7 +27,8 @@ test:
 production:
   adapter: postgresql
   encoding: utf8
-  database: twitter_school_development
+  database: schoolapp_production
+  host: localhost
   pool: 5
-  # username: root
-  # password: root123
+  username: root
+  password: admin

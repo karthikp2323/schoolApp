@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require skins.min
 //= require jquery
 //= require turbolinks
 //= require jquery.turbolinks
@@ -17,9 +18,9 @@
 //= require jquery-ui/dialog
 //= require jquery-ui/autocomplete
 //= require jquery.remotipart
-//= require skins.min
-//= require jquery.slimscroll.min
 //= require bootstrap-sprockets
+//= require jquery.slimscroll.min
+//= require beyond
 //= require moment
 //= require fullcalendar
 //= require dataTables/jquery.dataTables
@@ -40,16 +41,6 @@ jQuery(document).ready(function($){
 	    return $(window).scroll();
 	  }
 	});	
-	$('#sidebar-collapse').click(function(){
-		$('#sidebar').toggleClass('menu-compact');
-		$(this).toggleClass('active');
-	});
-
-	//Chat
-	$("#chat-link").click(function () {
-    $('.page-chatbar').toggleClass('open');
-    $(this).toggleClass('open');
-	});
 
 	$('.owl-carousel').owlCarousel({
     loop:true,
@@ -64,5 +55,12 @@ jQuery(document).ready(function($){
           items:3
       }
     }
+	});
+
+});
+$(window).load(function(){
+	$('.page-sidebar .sidebar-menu a').click(function(){
+		$('.page-sidebar .sidebar-menu li.active').removeClass('active');
+		$(this).parent().addClass('active');
 	});
 });

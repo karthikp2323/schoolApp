@@ -1,3 +1,5 @@
+<% provide(:title, "Teachers") %>
+
 <% if session[:role_type] == "Admin" %>
   <div class="page-breadcrumbs">
     <ul class="breadcrumb">
@@ -8,6 +10,26 @@
       <li class="active"><%= link_to 'Manage Teachers', '#' %></li>
     </ul>
   </div>
+  <!-- Page Header -->
+  <div class="page-header position-relative">
+    <div class="header-title">
+      <h1><%= yield(:title) %></h1>
+    </div>
+    <!--Header Buttons-->
+    <div class="header-buttons">
+      <a class="sidebar-toggler" href="#">
+        <i class="fa fa-arrows-h"></i>
+      </a>
+      <a class="refresh" id="refresh-toggler" href="">
+        <i class="glyphicon glyphicon-refresh"></i>
+      </a>
+      <a class="fullscreen" id="fullscreen-toggler" href="#">
+        <i class="glyphicon glyphicon-fullscreen"></i>
+      </a>
+    </div>
+    <!--Header Buttons End-->
+  </div>
+  <!-- /Page Header -->
 <% else %>
 
 <% end %>
@@ -20,18 +42,24 @@
         <div class="widget-header bordered-bottom bordered-blue">
           <span class='widget-caption'>Teacher's List</span>
           <div class="widget-buttons custom-widget-buttons">
-            <button type="button" class="btn btn-default" onclick="manageTeacher('new')">Add Teacher</button>
+            <!-- <button type="button" class="btn btn-default" onclick="manageTeacher('new')">Add Teacher</button> -->
+            <a href="#" data-toggle="maximize">
+              <i class="fa fa-expand"></i>
+            </a>
+            <a href="#" data-toggle="collapse">
+              <i class="fa fa-minus"></i>
+            </a>
           </div>
         </div>
         <div class="widget-body">
-          <table id="teacherDataTable">
+          <table id="teacherDataTable" class="table table-striped table-bordered table-hover">
             <thead>
               <tr role="row">
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Email</th>
                 <th>Contact</th>
-                <th></th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -41,11 +69,20 @@
                   <td><%= school_user.last_name %></td>
                   <td><%= school_user.email_id %></td>
                   <td><%= school_user.contact %></td>
-                  <td> 
-                    <button type="button" class="btn btn-info btn-xs" onclick="manageTeacher(<%= school_user.id %>)"> Edit </button>
-                    <%= link_to 'Delete ', school_user, method: :delete, data: { confirm: 'Are you sure, all of his/her data will also be removed?' }, class: 'btn btn-info btn-xs' %>                      
-                    <button type="button" class="btn btn-info btn-xs glyphicon glyphicon-plus" onclick="addClassToTeacher('<%= school_user.first_name %> <%= school_user.last_name %>', '<%= school_user.id %>')"> Class </button>
-                    <button type="button" class="btn btn-info btn-xs glyphicon glyphicon-eye-open" onclick="getClasses(<%= school_user.id %>)"> Classes </button>
+                  <td class='text-center action_buttons'> 
+                    <!-- <button type="button" class="btn btn-info btn-xs" onclick="manageTeacher(<%= school_user.id %>)"> Edit </button> -->
+                    <%= link_to "javascript:manageTeacher(#{school_user.id});" do  %>
+                      <i class='fa fa-pencil fa-2x'></i>
+                    <% end %>
+                    <%= link_to school_user, method: :delete, data: { confirm: 'Are you sure, all of his/her data will also be removed?' } do %>
+                      <i class='fa fa-times-circle fa-2x'></i>
+                    <% end %>
+                    <%= link_to "javascript:addClassToTeacher('#{school_user.first_name} #{school_user.last_name}', #{school_user.id});" do %>
+                      <i class='fa fa-plus-circle fa-2x'></i>
+                    <% end %>
+                    <%= link_to "javascript:getClasses(#{school_user.id});" do %>
+                      <i class='fa fa-eye fa-2x'></i>
+                    <% end %>
                     <%# <td><%= link_to 'Show', school_user ></td> %>
                   </td>
                 </tr>

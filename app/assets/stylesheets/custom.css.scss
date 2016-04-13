@@ -54,6 +54,9 @@ body{
 			}
 		}
 	}
+	.page-header{
+		margin: 0px;
+	}
 	.front-page-body{
 		padding: 0px;
 	}
@@ -205,6 +208,14 @@ body{
 			background: none;
 			box-shadow: none;
 			padding: 30px 20px;
+		}
+	}
+	.action_buttons{
+		a{
+			color: #337ab7;
+			&:hover{
+				color: #f68a28;
+			}
 		}
 	}
 }

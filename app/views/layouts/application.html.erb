@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>School Tweet</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -18,12 +18,13 @@
         <div class="loader"></div>
     </div> -->
     <!--  /Loading Container -->
-    <% if session[:school_id] || session[:parent_id] %>
-      <%= render 'layouts/navbar' %>
-    <% end %>
-    <!-- <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p> -->
-    <% if session[:school_id] || session[:parent_id] %>    
+    <% if session[:school_id] || session[:parent_id] %> 
+      <!-- Loading Container -->
+      <div class="loading-container">
+          <div class="loader"></div>
+      </div>
+      <!--  /Loading Container -->
+      <%= render 'layouts/navbar' %>   
       <div class="main-container container-fluid admin-container">
         <div class="page-container">
           <div id="sidebar" class="page-sidebar" >
