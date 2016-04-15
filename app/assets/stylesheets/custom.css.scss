@@ -218,4 +218,42 @@ body{
 			}
 		}
 	}
+	.tab-content{
+		.circle_icon{
+			width: 50px;
+			height: 50px;
+			border-radius: 100%;
+			display: inline-block;
+			i{
+				line-height: 50px;
+				color: #fff;
+			}
+			span{
+				line-height: 50px;
+				font-size: 2em;
+				color: #fff;
+			}
+		}
+		.photo{
+			background: #29b9bb;
+		}
+		.calendar{
+			background: #fba32a;
+		}
+		.comment{
+			background: #fecc38;
+		}
+		.first{
+			background: #5463d6;
+		}
+		.part_content{
+			padding-left: 20px;
+			h3{
+				margin-top: 10px;
+			}
+			p{
+				font-size: 14px;
+			}
+		}
+	}
 }

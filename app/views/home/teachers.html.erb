@@ -14,81 +14,115 @@
   </div>
 </section>
 
-<section id="features">
-  <div class="container services-container">
-    <div class="row services_row">
-      <div class="col-md-6 text-center">
-        <%= image_tag 'school.jpg', :class => 'img-services' %>
-      </div>
-      <div class="col-md-6 text-center">
-        <h3>For Schools</h3>
-        <hr class="primary-small">
-        <p class="text-muted p-services">Manage your classrooms, schedule events, stay in touch with parents, and many more..</p>
-        <%= link_to 'Read More', '#', :class => 'btn btn-default' %>
-      </div>
-    </div>
-    <div class='row services_row'>
-      <div class="col-md-6 text-center">
-        <h3>For Parents</h3>
-        <hr class="primary-small">
-        <p class="text-muted p-services">Get your child's daily activity, able to communicate with teachers, and many more..</p>
-        <%= link_to 'Read More', '#', :class => 'btn btn-default' %>
-      </div>
-      <div class="col-md-6 text-center">
-        <%= image_tag 'parents.jpg', :class => 'img-services' %>
-      </div>
-    </div>
-    <div class='row services_row'>
-      <div class="col-md-6 text-center">
-        <%= image_tag 'student.jpg', :class => 'img-services' %>
-      </div>
-      <div class="col-md-6 text-center">
-        <h3>For Students</h3>
-        <hr class="primary-small">
-        <p class="text-muted p-services">Check class activities, scheduled events, and many more..</p>
-        <%= link_to 'Read More', '#', :class => 'btn btn-default' %>
+<section class='tab_section custom_tab_section'>  
+  <div class='container'> 
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tabbable">
+          <ul class="nav nav-tabs nav-justified">
+            <li class="active">
+              <a data-toggle="tab" href="#how_videos">How to Videos</a>
+            </li>
+            <li>
+              <a data-toggle="tab" href="#print_resources">Printable Resources</a>
+            </li>
+            <li>
+              <a data-toggle="tab" href="#become_ambassador">Become an Ambassador</a>
+            </li>
+            <li>
+              <a data-toggle="tab" href="#share_story">Share your Story</a>
+            </li>
+            <li>
+              <a data-toggle="tab" href="#articles_advice">Articles & Advice</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="how_videos" class="tab-pane in active controller">
+              <div class='row text-center'>
+                <div class='col-md-4'>
+                  <h2>How-To Videos</h2>
+                  <h4 class='text-left'>For the “audio-visually inclined”:</h4>
+                  <ul class='text-left'>
+                    <li><%= link_to 'Meet Katie, our resident preschool expert.', '#' %></li>
+                    <li><%= link_to 'Basic set-up.', '#' %></li>
+                    <li><%= link_to 'Check-ins.', '#' %></li>
+                    <li><%= link_to 'Inviting parents.', '#' %></li>
+                    <li><%= link_to 'Billing.', '#' %></li>
+                    <li><%= link_to 'Managing your account.', '#' %></li>
+                  </ul>
+                </div>
+                <div class='col-md-8'>
+                  <iframe width="100%" height="100%" src="//www.youtube.com/embed/8owWJxIuey0?autoplay=0&amp;rel=0&amp;wmode=opaque" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+                </div>
+              </div>
+            </div>
+            <div id='print_resources' class="tab-pane in controller">
+              <div class='col-md-4 text-left'>
+                <h3>Printable “101s”</h3>
+                <h4>Everything you need to know about:</h4>
+                <ul>
+                  <li><%= link_to 'Top Tips & Best Practices', '#' %></li>
+                  <li><%= link_to 'Basic Set-up', '#' %></li>
+                  <li><%= link_to 'Check-In', '#' %></li>
+                  <li><%= link_to 'Daily Reporting', '#' %></li>
+                  <li><%= link_to 'Inviting Parents', '#' %></li>
+                  <li><%= link_to 'Billing', '#' %></li>
+                </ul>
+              </div>
+              <div class='col-md-4 text-left'>
+                <h3>Communication Resources</h3>
+                <h4>For context sharing with staff and parents.</h4>
+                <ul>
+                  <li><%= link_to 'Brightwheel 1-page overview for teachers/administrators', '#' %></li>
+                  <li><%= link_to 'Brightwheel 1-page overview for parents', '#' %></li>
+                  <li><%= link_to 'Editable intro presentation for parents', '#' %></li>
+                  <li><%= link_to 'Billing overview for parents', '#' %></li>
+                  <li><%= link_to 'Draft email for teachers to send parents', '#' %></li>
+                </ul>
+              </div>
+              <div class='col-md-4 text-left'>
+                <h3>Reference Resources</h3>
+                <h4>For visibility into what parents and teachers receive.</h4>
+                <ul>
+                  <li><%= link_to 'Invite email that parents receive to join brightwheel', '#' %></li>
+                  <li><%= link_to 'Invite PDF for parents via invite codes', '#' %></li>
+                  <li><%= link_to 'Invite email that parents receive to join billing feature', '#' %></li>
+                  <li><%= link_to 'Invite email that teachers receive to join brightwheel', '#' %></li>
+                </ul>
+              </div>
+            </div>
+            <div id='become_ambassador' class="tab-pane in controller">
+              <div class='row text-center'>
+                <h2>Improve enrollment and retention with brightwheel.</h2>
+                <p>Schools across the country report that using brightwheel has 1) prevented parents from leaving their centers, 2) increased application and enrollment volume, and 3) sharply increased parent satisfaction. Linked below are some materials you can add to your website to assist in marketing your facility’s services and resources.</p>
+                <%= link_to 'Market your use of brightwheel on your website!', '#', :class => 'btn btn-default' %>
+              </div>
+            </div>
+            <div id='share_story' class="tab-pane in controller">
+              <div class='row text-center'>
+                <h2>Share your brightwheel story.</h2>
+                <p>Our company only succeeds when our teachers and administrators succeed. Please tell us how brightwheel has impacted your classroom or school.</p>
+                <%= link_to 'Find out more', '#', :class => 'btn btn-default' %>
+              </div>
+            </div>
+            <div id='articles_advice' class="tab-pane in controller">
+              <div class='row text-center'>
+                <h1>Articles & Advice</h1>
+                <% 6.times do %>
+                  <div class='col-md-4'>
+                    <%= image_tag 'school.jpg', :class => 'img-services auto-fill' %>
+                    <h3>What to Ask on a Daycare Center Tour</h3>
+                    <%= link_to 'Read More', '#', :class => 'btn btn-default' %>
+                  </div>
+                <% end %>
+              </div>
+              <div class='row text-center'>
+                <%= link_to 'Show More', '#', :class => 'btn btn-default' %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<section class="owl-carousel">
-  <div><%= link_to image_tag('misc2.jpg'), '#' %></div>
-  <div><%= link_to image_tag('misc4.jpg'), '#' %></div>
-  <div><%= link_to image_tag('misc3.jpg'), '#' %></div>
-</div>
-
-<section id="contact">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 text-center">
-        <h2 class="section-heading">Let's Get In Touch!</h2>
-        <hr class="primary">
-        <p> That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
-      </div> 
-    </div>
-    <div class="row row-contact">
-                 
-      <div class="col-lg-4 col-sm-6">
-        <div class="column4">
-          <span class="icon"><i class="glyphicon glyphicon-home"></i></span>
-          <span class="title">Mail</span>
-          <p>5131 Post Rd <br>Dublin, OH 43016</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-        <div class="column4">
-          <span class="icon"><i class="glyphicon glyphicon-envelope"></i></span>
-          <span class="title">Email</span>
-          <p><a href="mailto:schoolapp@dsiginc.com">schoolapp@dsiginc.com</a></p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6">
-        <div class="column4">
-          <span class="icon"><i class="glyphicon glyphicon-earphone"></i></span>
-          <span class="title">Contact</span>
-          <p>(614).932.1458</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>       
