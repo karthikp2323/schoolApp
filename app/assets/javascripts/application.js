@@ -57,7 +57,7 @@ jQuery(document).ready(function($){
     }
 	});
 
-	$('.custom_tab_section .tabbable .nav li').click(function(){
+	$('.custom_tab_section .tabbable .nav #custom_nav li').click(function(){
 		$(this).siblings('.active').removeClass('active');
 		$(this).addClass('active');
 	});

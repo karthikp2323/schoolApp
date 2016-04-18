@@ -29,15 +29,15 @@
           </ul>
           <div class="tab-content">
             <div id="invite_school" class="tab-pane in active controller">
-              <div class='row text-center'>
-                <h1>Invite your school to brightwheel.</h1>
+              <div class='row text-center padding25'>
+                <h1 class='padding15'>Invite your school to brightwheel.</h1>
                 <p>Want to see brightwheel used at your child’s school or daycare? Click below to invite your school to take advantage of our free app and easy billing!</p>
                 <%= link_to 'Invite your school', '#', :class => 'btn btn-default' %>
-                <p>Check out our <%= link_to 'Parent Pack', '#' %>!  You can also share this <%= link_to 'School Info Flyer', '#' %> or <%= link_to 'Draft Email', '#' %> with your school.</p>
+                <p class='padding15'>Check out our <%= link_to 'Parent Pack', '#' %>!  You can also share this <%= link_to 'School Info Flyer', '#' %> or <%= link_to 'Draft Email', '#' %> with your school.</p>
               </div>
             </div>
             <div id="features_parents" class="tab-pane in controller">
-              <div class="row services_row">
+              <div class="row services_row padding25">
                 <div class="col-md-6 text-center">
                   <h2>Your child’s day, delivered real-time.</h2>
                   <hr class="primary-small">
@@ -103,16 +103,16 @@
             </div>
             <div id="articles_advice" class="tab-pane in controller">
               <div class='row text-center'>
-                <h1>Articles & Advice</h1>
+                <h1 class='padding25'>Articles & Advice</h1>
                 <% 6.times do %>
-                  <div class='col-md-4'>
+                  <div class='col-md-4 padding15'>
                     <%= image_tag 'school.jpg', :class => 'img-services auto-fill' %>
                     <h3>What to Ask on a Daycare Center Tour</h3>
                     <%= link_to 'Read More', '#', :class => 'btn btn-default' %>
                   </div>
                 <% end %>
               </div>
-              <div class='row text-center'>
+              <div class='row text-center padding15'>
                 <%= link_to 'Show More', '#', :class => 'btn btn-default' %>
               </div>
             </div>
