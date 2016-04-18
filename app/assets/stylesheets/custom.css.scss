@@ -54,6 +54,13 @@ body{
 			}
 		}
 	}
+	.page-sidebar {
+		.sidebar-menu{
+		 	li{
+		 		left: 0px;
+		 	}
+		}
+	}
 	.page-breadcrumbs{
 		.breadcrumb{
 			li.active{
@@ -264,6 +271,13 @@ body{
 		}
 		p{
 			font-size: 14px;
+		}
+	}
+	.login-body{
+		.login-row{
+			input[type='submit']{
+				width: 100%;
+			}
 		}
 	}
 }
