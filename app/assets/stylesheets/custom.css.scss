@@ -11,6 +11,15 @@
 
 body{
 	font-family: "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+	.padding25{
+		padding-top: 25px;
+    	padding-bottom: 25px;
+	}
+	.padding15{
+		padding-top: 15px;
+    	padding-bottom: 15px;
+	}
+
 	a{
 	 &:hover{
 	 	text-decoration: none;
@@ -186,21 +195,24 @@ body{
 		margin-left: -285px;
 	}
 	.custom_tab_section{
-		.nav-tabs{
-			box-shadow: none;
-			li{
-				&.active{
-					a{
-						color: #f68a28;
-						border: none;
-						background: #fff;
-						box-shadow: none;
-						font-weight: bold;
+		.tabbable{
+			padding: 25px 0px;
+			.nav-tabs{
+				box-shadow: none;
+				li{
+					&.active{
+						a{
+							color: #f68a28;
+							border: 1px solid #ddd;
+							background: #fff;
+							box-shadow: none;
+							font-weight: bold;
+						}
 					}
-				}
-				a{
-					border: none;
-					font-size: 12px;
+					a{
+						border: none;
+						font-size: 12px;
+					}
 				}
 			}
 		}

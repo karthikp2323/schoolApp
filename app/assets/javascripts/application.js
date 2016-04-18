@@ -57,6 +57,11 @@ jQuery(document).ready(function($){
     }
 	});
 
+	$('.custom_tab_section .tabbable .nav li').click(function(){
+		$(this).siblings('.active').removeClass('active');
+		$(this).addClass('active');
+	});
+
 });
 $(window).load(function(){
 	$('.page-sidebar .sidebar-menu a').click(function(){

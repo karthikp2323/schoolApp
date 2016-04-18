@@ -30,15 +30,17 @@
         </div>
       </div>
     </div>
-    <div class='row'>
+    <div class='row padding25'>
       <div id="classroom_features" class="col-md-12 controller">
         <div class="row services_row">
           <div class="col-md-6 text-center">
             <%= image_tag 'school.jpg', :class => 'img-services auto-fill' %>
           </div>
           <div class="col-md-6 text-center">
-            <h2>Classroom Features</h2>
-            <hr class="primary-small">
+            <div class='row padding15'>
+              <h2>Classroom Features</h2>
+              <hr class="primary-small">
+            </div>
             <div class='row'>
               <span class='col-md-2 circle_icon photo'>
                 <i class='fa fa-camera fa-2x'></i>
@@ -63,7 +65,7 @@
               </span>
               <div class='col-md-10 text-left part_content'>
                 <h3>PARENT COMMUNICATION</h3>
-                <p>Send notices and call right from within the app.</p>
+                <p>Communicate with parent’s directly by using our messaging service with in the app.</p>
               </div>
             </div>
             <div class='row'>
@@ -72,21 +74,23 @@
               </span>
               <div class='col-md-10 text-left part_content'>
                 <h3>EVENT SCHEDULING</h3>
-                <p>Record student observations, share privately amongst teachers.</p>
+                <p>Invite parent’s for an event using event scheduling system, and be updated with number of attendees.</p>
               </div>
             </div>
-            <%= link_to 'See All Features', '#', :class => 'btn btn-default' %>
+            <%= link_to 'See All Features', root_path + "#features", :class => 'btn btn-default' %>
           </div>
         </div>
       </div>
     </div>
 
-    <div class='row'>
+    <div class='row padding25'>
       <div id="admin_features">
         <div class="row services_row">
           <div class="col-md-6 text-center">
-            <h2>Admin Features</h2>
-            <hr class="primary-small">
+            <div class='row padding15'>
+              <h2>Admin Features</h2>
+              <hr class="primary-small">
+            </div>
             <div class='row'>
               <span class='col-md-2 circle_icon first'>
                 <i class='fa fa-database fa-2x'></i>
@@ -102,7 +106,7 @@
               </span>
               <div class='col-md-10 text-left part_content'>
                 <h3>STAY UPDATED WITH ALL CLASSES</h3>
-                <p>Easy, secure check-ins with optional passcode. COMING SOON: Check in from parent devices!</p>
+                <p>Now, easily stay updated with all the activities happening in the classes.</p>
               </div>
             </div>
             <div class='row'>
@@ -111,7 +115,7 @@
               </span>
               <div class='col-md-10 text-left part_content'>
                 <h3>MANAGE USERS</h3>
-                <p>Automated electronic billing and payments for your families.</p>
+                <p>Manage all your user’s in simple steps.</p>
               </div>
             </div>
             <div class='row'>
@@ -120,10 +124,10 @@
               </span>
               <div class='col-md-10 text-left part_content'>
                 <h3>PARENT COMMUNICATION</h3>
-                <p>Track attendance for billing and licensing requirements.</p>
+                <p>Communicate with parent’s directly by using our messaging service with in the app.</p>
               </div>
             </div>
-            <%= link_to 'See All Features', '#', :class => 'btn btn-default' %>
+            <%= link_to 'See All Features', root_path + "#features", :class => 'btn btn-default' %>
           </div>
           <div class="col-md-6 text-center">
             <%= image_tag 'school.jpg', :class => 'img-services auto-fill' %>
@@ -132,12 +136,12 @@
       </div>
     </div>
 
-    <div class='row'>
+    <div class='row padding25'>
       <div id="getting_started">
-        <div class='text-center'>
+        <div class='text-center padding15'>
           <h1>Getting started is as easy as 1-2-3.</h1>
         </div>
-        <div class='row'>
+        <div class='row padding15'>
           <div class='col-md-4 text-center'>
             <span class='circle_icon first'>
               <span>1</span>
@@ -157,9 +161,7 @@
             <p>Set up your classroom. Add students on your device or on the web, or just upload your roster in the School Portal.</p>
           </div>
         </div>
-        <div class='row text-center'>
-          <h1>Track your setup progress!</h1>
-          <%= link_to 'Getting Started Checklist', '#', :class => 'btn btn-default' %>
+        <div class='row text-center padding15'>
           <h2>Have question or need help?</h2>
           <%= link_to '#', :class => 'btn btn-default' do %>
             <i class='fa fa-phone'></i>Contact Us
@@ -167,142 +169,5 @@
         </div>
       </div>
     </div>
-
-	        <!-- <div class="tab-content">
-            <div id="classroom_features" class="tab-pane in active controller">
-              <div class="row services_row">
-                <div class="col-md-6 text-center">
-                  <%= image_tag 'school.jpg', :class => 'img-services auto-fill' %>
-                </div>
-                <div class="col-md-6 text-center">
-                  <h2>Classroom Features</h2>
-                  <hr class="primary-small">
-                  <div class='row'>
-                    <span class='col-md-2 circle_icon photo'>
-                      <i class='fa fa-camera fa-2x'></i>
-                    </span>
-                    <div class='col-md-10 text-left part_content'>
-                      <h3>PHOTO SHARING</h3>
-                      <p>Capture and share classroom moments with one click.</p>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <span class='col-md-2 circle_icon calendar'>
-                      <i class='fa fa-calendar fa-2x'></i>
-                    </span>
-                    <div class='col-md-10 text-left part_content'>
-                      <h3>DAILY REPORTS</h3>
-                      <p>Real-time feed of the school day for parents.</p>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <span class='col-md-2 circle_icon comment'>
-                      <i class='fa fa-comment-o fa-2x'></i>
-                    </span>
-                    <div class='col-md-10 text-left part_content'>
-                      <h3>PARENT COMMUNICATION</h3>
-                      <p>Send notices and call right from within the app.</p>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <span class='col-md-2 circle_icon first'>
-                      <i class='fa fa-thumbs-up fa-2x'></i>
-                    </span>
-                    <div class='col-md-10 text-left part_content'>
-                      <h3>ASSESSMENTS</h3>
-                      <p>Record student observations, share privately amongst teachers.</p>
-                    </div>
-                  </div>
-                  <%= link_to 'See All Features', '#', :class => 'btn btn-default' %>
-                </div>
-              </div>
-            </div>
-
-            <div id="admin_features" class="tab-pane">
-              <div class="row services_row">
-                <div class="col-md-6 text-center">
-                  <h2>Admin Features</h2>
-                  <hr class="primary-small">
-                  <div class='row'>
-                    <span class='col-md-2 circle_icon photo'>
-                      <i class='fa fa-check fa-2x'></i>
-                    </span>
-                    <div class='col-md-10 text-left part_content'>
-                      <h3>DIGITAL CHECK-IN</h3>
-                      <p>Easy, secure check-ins with optional passcode. COMING SOON: Check in from parent devices!</p>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <span class='col-md-2 circle_icon calendar'>
-                      <i class='fa fa-money fa-2x'></i>
-                    </span>
-                    <div class='col-md-10 text-left part_content'>
-                      <h3>BILLING</h3>
-                      <p>Automated electronic billing and payments for your families.</p>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <span class='col-md-2 circle_icon comment'>
-                      <i class='fa fa-child fa-2x'></i>
-                    </span>
-                    <div class='col-md-10 text-left part_content'>
-                      <h3>ATTENDANCE REPORTS</h3>
-                      <p>Track attendance for billing and licensing requirements.</p>
-                    </div>
-                  </div>
-                  <div class='row'>
-                    <span class='col-md-2 circle_icon first'>
-                      <i class='fa fa-database fa-2x'></i>
-                    </span>
-                    <div class='col-md-10 text-left part_content'>
-                      <h3>CENTRAL DATABASE</h3>
-                      <p>Store everything related to children and families in one secure place.</p>
-                    </div>
-                  </div>
-                  <%= link_to 'See All Features', '#', :class => 'btn btn-default' %>
-                </div>
-                <div class="col-md-6 text-center">
-                  <%= image_tag 'school.jpg', :class => 'img-services auto-fill' %>
-                </div>
-              </div>
-            </div>
-
-            <div id="getting_started" class="tab-pane">
-              <div class='text-center'>
-                <h1>Getting started is as easy as 1-2-3.</h1>
-              </div>
-              <div class='row'>
-                <div class='col-md-4 text-center'>
-                  <span class='circle_icon first'>
-                    <span>1</span>
-                  </span>
-                  <p>Download our app from the Apple App Store or Google Play and sign up for a school account.</p>
-                </div>
-                <div class='col-md-4 text-center'>
-                  <span class='circle_icon calendar'>
-                    <span>2</span>
-                  </span>
-                  <p>Test out features using the Demo Room.</p>
-                </div>
-                <div class='col-md-4 text-center'>
-                  <span class='circle_icon photo'>
-                    <span>3</span>
-                  </span>
-                  <p>Set up your classroom. Add students on your device or on the web, or just upload your roster in the School Portal.</p>
-                </div>
-              </div>
-              <div class='row text-center'>
-                <h1>Track your setup progress!</h1>
-                <%= link_to 'Getting Started Checklist', '#', :class => 'btn btn-default' %>
-                <h2>Have question or need help?</h2>
-                <%= link_to '#', :class => 'btn btn-default' do %>
-                  <i class='fa fa-phone'></i>Contact Us
-                <% end %>
-              </div>
-            </div>
-	        </div> -->
-  	    </<!-- div>
-    	</div>
-    </div> -->
   </div>
 </section>
