@@ -75,6 +75,7 @@ body{
 	}
 	.front-page-body{
 		padding: 0px;
+		background: #fff;
 	}
 	.custom-nav-bar{
 		min-height: auto;
@@ -206,12 +207,13 @@ body{
 			padding: 25px 0px;
 			.nav-tabs{
 				box-shadow: none;
+				background: #fff;
 				li{
 					&.active{
 						a{
 							color: #f68a28;
 							border: 1px solid #ddd;
-							background: #fff;
+							background: #eee;
 							box-shadow: none;
 							font-weight: bold;
 						}
