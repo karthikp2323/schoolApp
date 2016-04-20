@@ -291,4 +291,20 @@ body{
 		margin-top: 0px;
 		padding-top: 30px;
 	}
+	div.dataTables_length{
+		position: relative;
+	}
+	.add_teacher{
+		color: #337ab7;
+		&:hover{
+			color: #337ab7;
+		}
+	}
+	.ui-dialog-titlebar-close{
+		display: none;
+	}
+	.ui-dialog-titlebar{
+		background: #03b3b2;
+		margin-right: -3px;
+	}
 }

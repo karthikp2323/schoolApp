@@ -83,7 +83,6 @@ var form_data = $('form').serialize();
         
         $("#editabledatatable").prepend("<tr><td>"+ data.first_name +"</td> <td> "+ data.last_name +" </td> <td> "+ data.email_id +" </td> <td>"+ data.contact + "</td> <td> <a class='btn btn-info btn-xs' href='/school_users/"+ data.id+"/edit'> Edit </a> <a class='btn btn-info btn-xs' data-confirm='Are you sure, all of his/her data will also be removed?' data-method='delete' href='/school_users/"+data.id+"'> Delete </a> <a class='btn btn-info btn-xs glyphicon glyphicon-plus' href='/classrooms/new?user_id="+data.id+"'>  Class </a> <button type='button' class='btn btn-info btn-xs glyphicon glyphicon-eye-open' onclick='getClasses("+data.id+")'> Classes </button> </td></tr>");
 
-
         //display message
         $("#lbl-success-message").show();
 

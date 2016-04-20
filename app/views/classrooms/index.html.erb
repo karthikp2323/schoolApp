@@ -79,12 +79,14 @@
                     <%= link_to classroom, method: :delete, data: { confirm: 'Are you sure to delete all of the class data?' }, :class => 'edit' do %>
                       <i class='fa fa-times-circle fa-2x'></i>
                     <% end %>
-                    <%= link_to "javascript:addStudentDailog(#{classroom.id});" do %>
+                    <!-- <%= link_to "javascript:addStudentDailog(#{classroom.id});" do %>
                       <i class='fa fa-plus-circle fa-2x'></i>
-                    <% end %>
-                    <%= link_to "javascript:getStudentList(#{classroom.id});" do %>
+                    <% end %> -->
+                    <!-- <%= link_to "javascript:getStudentList(#{classroom.id});" do %>
                       <i class='fa fa-eye fa-2x'></i>
-                    <% end %>
+                    <% end %> -->
+                    <button type="button" class="btn btn-info btn-xs" onclick="addStudentDailog(<%= classroom.id %>)"> Add Students </button>
+                    <button type="button" class="btn btn-info btn-xs" onclick="getStudentList(<%= classroom.id %>)"> View Students </button>
                   </td>
                 </tr>
               <% end %>
@@ -105,7 +107,16 @@
         $("#dialog_add_students").hide();
 
         $(function() {
-          return $("#classroomtable").dataTable({});
+          // return $("#classroomtable").dataTable({});
+          // if ( $.fn.dataTable.isDataTable( '#classroomtable' ) ) {
+          //   table = $('#classroomtable').DataTable();
+          // }
+          // else {
+          //   table = $('#classroomtable').DataTable( {
+          //     // paging: false
+          //   } );
+          // }
+          return $('#classroomtable').DataTable();
         });
       });
 

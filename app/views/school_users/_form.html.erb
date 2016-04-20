@@ -94,14 +94,14 @@
             // console.log(data.last_name);
               if ($("#txt_edit_or_save").val() == "edit") {
                   
-                  $("#"+data.id).html("<td> "+ data.first_name +" </td> <td> "+ data.last_name +" </td> <td> "+ data.email_id +" </td> <td> "+data.contact +" </td> <td> <button type='button' class='btn btn-info btn-xs' onclick='manageTeacher("+data.id+")'> Edit </button> <a class='btn btn-info btn-xs' data-confirm='Are you sure, all of his/her data will also be removed?' data-method='delete' href='/school_users/"+data.id+"'> Delete </a> <button type='button' class='btn btn-info btn-xs glyphicon glyphicon-plus' onclick='addClassToTeacher(" + '"' + data.first_name + " "+data.last_name +'"' +"," +data.id+" )'> Class </button> <button type='button' class='btn btn-info btn-xs glyphicon glyphicon-eye-open' onclick='getClasses("+data.id+")'> Classes </button>   </td>");
-
+                  $("#"+data.id).html("<td> "+ data.first_name +" </td> <td> "+ data.last_name +" </td> <td> "+ data.email_id +" </td> <td> "+data.contact +" </td> <td class='text-center action_buttons'><a href='javascript:manageTeacher("+data.id + ");'><i class='fa fa-pencil fa-2x'></i></a> <a data-confirm='Are you sure, all of his/her data will also be removed?' data-method='delete' href='/school_users/"+data.id+"'> <i class='fa fa-times-circle fa-2x'></i> </a> <button type='button' class='btn btn-info btn-xs' onclick='addClassToTeacher(" + '"' + data.first_name + " "+data.last_name +'"' +"," +data.id+" )'> Add Class </button> <button type='button' class='btn btn-info btn-xs' onclick='getClasses("+data.id+")'> Show Classes </button>   </td>");
+                  // console.log('bb');
                   $("#lbl_success_message").text("Teacher Updated!");
                   
               }
               else{
                 //console.log(data);
-                $("#teacherDataTable").prepend("<tr id="+data.id+"><td>"+ data.first_name +"</td> <td> "+ data.last_name +" </td> <td> "+ data.email_id +" </td> <td>"+ data.contact + "</td> <td> <button type='button' class='btn btn-info btn-xs' onclick='manageTeacher("+data.id+")'> Edit </button> <a class='btn btn-info btn-xs' data-confirm='Are you sure, all of his/her data will also be removed?' data-method='delete' href='/school_users/"+data.id+"'> Delete </a> <button type='button' class='btn btn-info btn-xs glyphicon glyphicon-plus' onclick='addClassToTeacher(" + '"' + data.first_name + " "+data.last_name +'"' +"," +data.id+" )'> Class </button> <button type='button' class='btn btn-info btn-xs glyphicon glyphicon-eye-open' onclick='getClasses("+data.id+")'> Classes </button> </td></tr>");
+                $("#teacherDataTable").prepend("<tr id="+data.id+"><td>"+ data.first_name +"</td> <td> "+ data.last_name +" </td> <td> "+ data.email_id +" </td> <td>"+ data.contact + "</td> <td class='text-center action_buttons'><a href='javascript:manageTeacher("+data.id + ");'><i class='fa fa-pencil fa-2x'></i></a> <a data-confirm='Are you sure, all of his/her data will also be removed?' data-method='delete' href='/school_users/"+data.id+"'> <i class='fa fa-times-circle fa-2x'></i> </a><button type='button' class='btn btn-info btn-xs' onclick='addClassToTeacher(" + '"' + data.first_name + " "+data.last_name +'"' +"," +data.id+" )'> Add Class </button> <button type='button' class='btn btn-info btn-xs' onclick='getClasses("+data.id+")'> Show Classes </button> </td></tr>");
 
 
                 //display message
