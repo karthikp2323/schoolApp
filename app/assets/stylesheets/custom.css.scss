@@ -307,4 +307,16 @@ body{
 		background: #03b3b2;
 		margin-right: -3px;
 	}
+	.admin-page-content{
+		table{
+			font-family: 'Raleway-Regular', sans-serif !important;	
+		}
+		.breadcrumb{
+			li{
+				a{
+					font-family: 'Raleway-Regular', sans-serif !important;				
+				}
+			}
+		}
+	}
 }

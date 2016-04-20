@@ -33,7 +33,7 @@
           <div id="chatbar" class="page-chatbar">
             <%= render 'layouts/chatbar' %> 
           </div>
-          <div class="page-content">
+          <div class="page-content admin-page-content">
             <!-- <div class="page-breadcrumbs"></div> -->
             <!-- <div class="page-body"> -->
         		  <%= yield %>
@@ -67,7 +67,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li><%= link_to 'Schools & Daycares', daycares_summary_path %></li>
                 <li><%= link_to 'Parents', parents_summary_path %></li>
-                <li><%= link_to 'Features', root_path + "#features" %></li>
+                <li><%= link_to 'Features', features_summary_path %></li>
                 <li><%= link_to 'Contact', root_path + "#contact" %></li>
                 <li>
                   <%= link_to home_login_path, :class => 'btn_login' do %>

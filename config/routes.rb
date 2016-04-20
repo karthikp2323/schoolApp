@@ -65,9 +65,7 @@ Rails.application.routes.draw do
   get 'teachers_summary', to: 'home#teachers'
   get 'daycares_summary', to: 'home#daycares'
   get 'parents_summary', to: 'home#parents'
-
-
-  
+  get 'features_summary', to: 'home#features'
 
 
   match ':controller(/:action(/:id))', :via => :post
