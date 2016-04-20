@@ -62,6 +62,8 @@ jQuery(document).ready(function($){
 		$(this).addClass('active');
 	});
 
+	$('section.banner').height($(window).height());
+	$('.banner_content').css('padding-top', ($(window).height()-$('.banner_content').height())/2);
 });
 $(window).load(function(){
 	$('.page-sidebar .sidebar-menu a').click(function(){
