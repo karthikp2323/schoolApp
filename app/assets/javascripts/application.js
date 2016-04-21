@@ -64,6 +64,8 @@ jQuery(document).ready(function($){
 
 	$('section.banner').height($(window).height());
 	$('.banner_content').css('padding-top', ($(window).height()-$('.banner_content').height())/2);
+
+	$('[data-toggle="tooltip"]').tooltip();
 });
 $(window).load(function(){
 	$('.page-sidebar .sidebar-menu a').click(function(){

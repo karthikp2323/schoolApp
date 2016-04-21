@@ -238,9 +238,8 @@ body{
 	.action_buttons{
 		a{
 			color: #337ab7;
-			&:hover{
-				color: #f68a28;
-			}
+			display: inline-block;
+			margin-right: 10px;
 		}
 	}
 	.circle_icon{

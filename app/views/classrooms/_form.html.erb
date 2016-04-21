@@ -93,11 +93,12 @@ var form_data = $('form').serialize();
        if ($("#txt_edit_or_save").val() == "edit") {
         var teacherName =  $('#lblteacherName').text().split(":")[1];
 
-          $("#"+data.id).html("<td> "+ data.class_name +" </td> <td> "+ data.class_location +" </td> <td> "+ data.class_level +" </td> <td> "+ teacherName +" </td> <td style='display:none;''> "+ data.school_user_id +"</td> <td class='text-center action_buttons'> <a href='javascript:editClass("+data.id+");'><i class='fa fa-pencil fa-2x'></i></a><a data-confirm='Are you sure to delete all of the class data?' data-method='delete' href='/school_users/"+data.id+"'> <i class='fa fa-times-circle fa-2x'></i> </a> <button type='button' class='btn btn-info btn-xs' onclick='addStudentDailog("+data.id+")'> Add Students </button> <button type='button' class='btn btn-info btn-xs' onclick='getStudentList("+data.id+")'> View Students </button>   </td>");
+          $("#"+data.id).html("<td> "+ data.class_name +" </td> <td> "+ data.class_location +" </td> <td> "+ data.class_level +" </td> <td> "+ teacherName +" </td> <td style='display:none;''> "+ data.school_user_id +"</td> <td class='text-center action_buttons'> <a href='javascript:editClass("+data.id+");' data-toggle='tooltip' title='Edit Class'><i class='fa fa-pencil fa-2x'></i></a><a data-toggle='tooltip' title='Delete Class' data-confirm='Are you sure to delete all of the class data?' data-method='delete' href='/school_users/"+data.id+"'> <i class='fa fa-times-circle fa-2x'></i> </a> <a href='javascript:addStudentDailog("+data.id+");' data-toggle='tooltip' title='Add Students'><i class='fa fa-plus-circle fa-2x'></i></a> <a href='javascript:getStudentList("+data.id+");' data-toggle='tooltip' title='View Students'><i class='fa fa-eye fa-2x'></i></a>  </td>");
 
                  
        
           $("#lbl_success_add_class_message").text("Class Updated!");
+          $('[data-toggle="tooltip"]').tooltip();
 
        }
        else{

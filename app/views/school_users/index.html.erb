@@ -43,7 +43,7 @@
           <span class='widget-caption'>Teacher's List</span>
           <div class="widget-buttons custom-widget-buttons">
             <!-- <button type="button" class="btn btn-default" onclick="manageTeacher('new')">Add Teacher</button> -->
-            <%= link_to "javascript:manageTeacher('new');", :class => 'add_teacher' do  %>
+            <%= link_to "javascript:manageTeacher('new');", :class => 'add_teacher', data: {toggle: 'tooltip'}, :title => 'Add Teacher' do  %>
               <i class='fa fa-plus-circle fa-2x'></i>
             <% end %>
             <a href="#" data-toggle="maximize">
@@ -74,16 +74,20 @@
                   <td><%= school_user.contact %></td>
                   <td class='text-center action_buttons'> 
                     <!-- <button type="button" class="btn btn-info btn-xs" onclick="manageTeacher(<%= school_user.id %>)"> Edit </button> -->
-                    <%= link_to "javascript:manageTeacher(#{school_user.id});" do  %>
+                    <%= link_to "javascript:manageTeacher(#{school_user.id});", :title => "Edit Teacher", data: {toggle: 'tooltip'}  do  %>
                       <i class='fa fa-pencil fa-2x'></i>
                     <% end %>
-                    <%= link_to school_user, method: :delete, data: { confirm: 'Are you sure, all of his/her data will also be removed?' } do %>
+                    <%= link_to school_user, :title => 'Delete Teacher', method: :delete, data: { toggle: 'tooltip', confirm: 'Are you sure, all of his/her data will also be removed?' } do %>
                       <i class='fa fa-times-circle fa-2x'></i>
                     <% end %>
-                    <!-- <%= link_to 'Add Class', "javascript:addClassToTeacher('#{school_user.first_name} #{school_user.last_name}', #{school_user.id});" %> -->
-                    <button type="button" class="btn btn-info btn-xs" onclick="addClassToTeacher('<%= school_user.first_name + ' ' + school_user.last_name %>', <%= school_user.id %>);"> Add Class </button>
-                    <!-- <%= link_to 'Show Classes', "javascript:getClasses(#{school_user.id});"%> -->
-                    <button type="button" class="btn btn-info btn-xs" onclick="getClasses(<%= school_user.id %>)"> Show Classes </button>
+                    <%= link_to "javascript:addClassToTeacher('#{school_user.first_name} #{school_user.last_name}', #{school_user.id});", data: {toggle: 'tooltip'}, :title => "Add Class" do %> 
+                      <i class='fa fa-plus-circle fa-2x'></i>
+                    <% end %>
+                    <!-- <button type="button" class="btn btn-info btn-xs" onclick="addClassToTeacher('<%= school_user.first_name + ' ' + school_user.last_name %>', <%= school_user.id %>);"> Add Class </button> -->
+                    <%= link_to "javascript:getClasses(#{school_user.id});", data: {toggle: 'tooltip'}, :title => 'Show Classes' do %> 
+                      <i class='fa fa-eye fa-2x'></i>
+                    <% end %>
+                    <!-- <button type="button" class="btn btn-info btn-xs" onclick="getClasses(<%= school_user.id %>)"> Show Classes </button> -->
                     <%# <td><%= link_to 'Show', school_user ></td> %>
                   </td>
                 </tr>
