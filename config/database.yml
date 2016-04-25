@@ -25,7 +25,7 @@ test:
   
 
 production:
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   database: englandk_remindstaging
   host: 212.113.132.62
