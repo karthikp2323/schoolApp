@@ -27,8 +27,8 @@ test:
 production:
   adapter: postgresql
   encoding: utf8
-  database: schoolapp_production
-  host: localhost
+  database: englandk_remindstaging
+  host: 212.113.132.62
   pool: 5
-  username: root
-  password: admin
+  username: englandk_roger
+  password: newh@w
