@@ -5,17 +5,53 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     
+    # if (params[:start] && params[:end])
+    #   puts '#' * 100
+
+    #   if session[:role_type]  == "Admin"
+    #     eventsList1 = Event.where(event_date: params[:start]..params[:end], school_id: session[:school_id])
+    #   else
+    #     eventsList1 = Event.where(school_user_id: session[:user_id],event_date: params[:start]..params[:end], school_id: session[:school_id])  
+    #   end
+
+    #   eventsList = Array.new
+    
+    #   eventsList1.each do |event|
+    #     events = OpenStruct.new
+    #     events.id = event.id
+    #     events.event_title = event.event_title
+    #     events.event_description = event.event_description
+    #     events.event_time = event.event_time
+    #     events.event_location = event.event_location
+    #     events.school_user_id = event.school_user_id
+    #     events.classroom_id = event.classroom_id
+    #     events.date = event.event_date.to_s + " " + event.event_time.to_s
+        
+    #     events.date = Time.parse(events.date)
+    #     eventsList.push(events)
+    #     @eventsList = eventsList
+    #   end
+         
+    # end
+
     if (params[:start] && params[:end])
 
       if session[:role_type]  == "Admin"
-      eventsList1 = Event.where(event_date: params[:start]..params[:end], school_id: session[:school_id])
+        eventsList1 = Event.where(event_date: params[:start]..params[:end], school_id: session[:school_id])
       else
-      eventsList1 = Event.where(school_user_id: session[:user_id],event_date: params[:start]..params[:end], school_id: session[:school_id])  
-      end
-
-      eventsList = Array.new
+        eventsList1 = Event.where(school_user_id: session[:user_id],event_date: params[:start]..params[:end], school_id: session[:school_id])  
+      end         
+    else
+      if session[:role_type]  == "Admin"
+        eventsList1 = Event.where(school_id: session[:school_id])
+      else
+        eventsList1 = Event.where(school_user_id: session[:user_id], school_id: session[:school_id])
+      end         
+    end
     
-      eventsList1.each do |event|
+    eventsList = Array.new
+    
+    eventsList1.each do |event|
       events = OpenStruct.new
       events.id = event.id
       events.event_title = event.event_title
@@ -30,9 +66,6 @@ class EventsController < ApplicationController
       eventsList.push(events)
       @eventsList = eventsList
     end
-         
-    end
-    
     
   end
 

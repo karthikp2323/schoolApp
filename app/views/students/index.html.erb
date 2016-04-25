@@ -1,56 +1,91 @@
+<% provide(:title, 'Manage Students') %>
 <div class="page-breadcrumbs">
-  <h> <a href="/school_users/schoolUserHomeView"> Home </a> / <a href="/activities/new?class_id=<%= @classroomId %>&classname=<%=@classname%>" > <%= @classname %>  </a> / Student List </h>
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      <%= link_to 'Home', new_activity_path %>
+    </li>
+    <li class="active"><a href="/activities/new?class_id=<%= @classroomId %>&classname=<%=@classname%>" > <%= @classname %>  </a></li>
+    <li class="active">Student List</li>
+  </ul>
+</div>
+<div class="page-header position-relative">
+  <div class="header-title">
+    <h1><%= yield(:title) %></h1>
+  </div>
+  <!--Header Buttons-->
+  <div class="header-buttons">
+    <a class="sidebar-toggler" href="#">
+      <i class="fa fa-arrows-h"></i>
+    </a>
+    <a class="refresh" id="refresh-toggler" href="">
+      <i class="glyphicon glyphicon-refresh"></i>
+    </a>
+    <a class="fullscreen" id="fullscreen-toggler" href="#">
+      <i class="glyphicon glyphicon-fullscreen"></i>
+    </a>
+  </div>
+  <!--Header Buttons End-->
 </div>
 
+<div class="page-body">
+  <div class="row">
+    <p id="notice"><%= notice %></p>
 
-<p id="notice"><%= notice %></p>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="widget">
+        <div class="widget-header bordered-bottom bordered-blue">
+          <span class='widget-caption'>Student's List</span>
+          <div class="widget-buttons custom-widget-buttons">
+            <%= link_to "javascript:manageStudent(#{@classroomId})", :title => 'Add Student', data: {toggle: 'tooltip'}, :class => 'add_teacher' do %>
+              <i class='fa fa-plus-circle fa-2x'></i>
+            <% end %>
+            <a href="#" data-toggle="maximize">
+              <i class="fa fa-expand"></i>
+            </a>
+            <a href="#" data-toggle="collapse">
+              <i class="fa fa-minus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="widget-body">
+          <table id="tableStudentList">
+            <thead>
+              <tr >
+                <th>First Name</th>
+                <th>Last Name</th>
+                
+                <th>Parent Name</th>
+                <th> Student LogIn </th>
+                     
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-<div class="col-xs-12 col-md-12 student-table">
-
-<div class="widget">
-          <div class="widget-header bordered-bottom bordered-blue">
-                <span >Student's List</span>
-                <div class="widget-buttons" style="float: right">
-                    
-                     <button type="button" class="btn btn-default" onclick="manageStudent(<%= @classroomId %>)" style="margin-top: -18px;"> Add Student </button>
-                </div>
-            </div>
-<div class="widget-body">
-<table id="tableStudentList">
-  <thead>
-    <tr >
-      <th>First Name</th>
-      <th>Last Name</th>
-      
-      <th>Parent Name</th>
-      <th> Student LogIn </th>
-           
-      <th> </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @students.each do |student| %>
-      <tr id="<%= student.id %>">
-        <td><%= student.first_name %></td>
-        <td><%= student.last_name %></td>
-        
-        <td><%= student.parent.dad_fname %> <%= student.parent.dad_lname %></td>
-          
-        <td><% if student.IsLogIn == false%> NO <% else %> YES <% end %></td> 
-        <td>
-
-            <button type="button" class="btn btn-info btn-xs" onclick="manageStudent(<%= @classroomId %>, <%= student.id %>, <%= student.parent.id %>)"> Show/Edit </button>
-            <%= link_to 'Delete', {:controller => "students", :action => "destroy", :studentId => student.id, :classroomId => @classroomId}, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-info btn-xs edit' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <tbody>
+              <% @students.each do |student| %>
+                <tr id="<%= student.id %>">
+                  <td><%= student.first_name %></td>
+                  <td><%= student.last_name %></td>
+                  <td><%= student.parent.dad_fname %> <%= student.parent.dad_lname %></td>
+                  <td><% if student.IsLogIn == false%> NO <% else %> YES <% end %></td> 
+                  <td class='action_buttons'>
+                    <%= link_to "javascript:manageStudent(#{@classroomId}, #{student.id}, #{student.parent.id})", data: {toggle: 'tooltip'}, :title => 'Show & Edit Student'  do %>
+                      <i class='fa fa-2x fa-pencil'></i>
+                    <% end %>
+                    <%= link_to student_path(:id => student.id, :classroomId => @classroomId), data: { method: 'delete',confirm: 'Are you sure?', toggle: 'tooltip' }, :title => 'Delete Student' do %>
+                      <i class='fa fa-2x fa-times-circle'></i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-<br>
 
 <!-- <%= link_to 'New Student', new_student_path %> -->
 <script type="text/javascript">
@@ -59,9 +94,7 @@
  
       $("#dialogStudent").hide();
       jQuery(function() {
-              return $("#tableStudentList").dataTable({
-                
-              });
+        return $("#tableStudentList").DataTable();
       });    
     
   });
@@ -86,7 +119,7 @@
             maxHeight: 500,
             width: 870,
             title: "Add Student",
-            position: { my: "center", at: "center"},
+            // position: { my: "center", at: "center"},
             modal: true,
             buttons: {
               Close: function() {

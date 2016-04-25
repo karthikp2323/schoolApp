@@ -1,5 +1,6 @@
+<% n = 0 %>
 <% @activities.each do |activity| %>
-	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+	<!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 		<div class='widget'>
 			<div class="widget-header">
 			  <span class='widget-caption'><h><%= activity.title %></h></span> 
@@ -20,7 +21,45 @@
 				<p><%= activity.message %></p> 
 	  	</div>
 	  </div>
-	</div>
+	</div> -->
+	<% if (n += 1) % 2 == 1 %>
+		<li>
+	<% else %>
+		<li class='timeline-inverted'>
+	<% end %>
+	  <div class="timeline-datetime">
+	    <span class="timeline-time">
+	      <%= activity.created_at.strftime('%H:%M') %>
+	    </span><span class="timeline-date"><%= time_ago_in_words(activity.created_at) %> ago</span>
+	  </div>
+	  <div class="timeline-badge blue">
+	    <i class="fa fa-map-marker"></i>
+	  </div>
+	  <div class="timeline-panel">
+	    <div class="timeline-header bordered-bottom bordered-blue">
+	      <span class="timeline-title">
+	        <%= activity.title %>
+	      </span>
+	      <p class="timeline-datetime">
+	        <small class="text-muted">
+	          <i class="glyphicon glyphicon-time"></i>
+	          <span class="timeline-date"><%= time_ago_in_words(activity.created_at) %> ago</span>
+	          -
+	          <span class="timeline-time"><%= activity.created_at.strftime('%H:%M') %></span>
+	        </small>
+	      </p>
+	    </div>
+	    <div class="timeline-body">
+	      <% if activity.image.url.include? "assets/products" %>
+          <div class="widget_image">
+            <%= image_tag activity.image.url, :class => 'imageActivity' %>
+          </div>
+	     	  <hr class="hr-activities">	
+	      <% end %>
+				<p><%= activity.message %></p> 
+	    </div>
+	  </div>
+	</li>
 <% end %>
 
 

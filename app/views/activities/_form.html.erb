@@ -1,50 +1,69 @@
-<div class="col-lg-12 col-sm-12 col-xs-12">
-  <div class="widget">  <!-- / Widget Post activity box-->
-    <div class="widget-header bordered-bottom bordered-blue">
-        <span class="widget-caption">Post Activity</span>
+<% if session[:role_type] == "Teacher" || session[:role_type] == "Admin" %>
+  <%= form_for(@activity, remote: true) do  |f| %> <!-- authenticity_token: true -->
+    <% if @activity.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+        <ul>
+          <% @activity.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <span class="input-icon icon-right">
+        <%= f.text_field :title, class: 'form-control sm-input', placeholder: 'Title' %>
+        <i class="fa fa-camera themeprimary"></i>
+      </span>
     </div>
-    <div class="widget-body"> <!-- Widget-Body Post activity box-->
-                        
-      <%= form_for(@activity, remote: true) do  |f| %> <!-- authenticity_token: true -->
-        <% if @activity.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
-            <ul>
-              <% @activity.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
 
-        <div class="form-group">
-          <span class="input-icon icon-right">
-            <%= f.text_field :title, class: 'form-control sm-input', placeholder: 'Title' %>
-            <i class='glyphicon glyphicon-briefcase'></i>
-          </span>
-        </div>
+    <div class="form-group">
+      <span class="input-icon icon-right">
+        <%= f.text_area :message, class: 'form-control', placeholder: 'Message' %>
+        <i class="fa fa-camera themeprimary"></i>
+      </span>
+    </div>
 
-        <div class="form-group">
-          <span class="input-icon icon-right">
-            <%= f.text_area :message, class: 'form-control', placeholder: 'Message' %>
-            <i class='glyphicon glyphicon-briefcase'></i>
-          </span>
-        </div>
+    <div class="form-group">
+      <%= f.file_field :image %>
+    </div>
 
-        <div class="form-group">
-          <%= f.file_field :image %>
-        </div>
+    <!-- <div class='form-group'>
+      <%= f.check_box :activity_type %>
+      <%= f.check_box :allow_comment %>
+      <%= f.text_field :classroom_id, {:value => @classroom_id, :hidden => true} %>
+      <%= f.text_field :school_user_id, {:value => session[:user_id], :hidden => true}%>
+      <%= f.text_field :school_id, {:value => session[:school_id], :hidden => true}%>
+    </div> -->
 
-        <div class='form-group'>
-          <%= f.check_box :activity_type %>
-          <%= f.check_box :allow_comment %>
-          <%= f.text_field :classroom_id, {:value => @classroom_id, :hidden => true} %>
-          <%= f.text_field :school_user_id, {:value => session[:user_id], :hidden => true}%>
-          <%= f.text_field :school_id, {:value => session[:school_id], :hidden => true}%>
-        </div>
-       
-        <button type="submit" class="btn btn-blue">Post</button>
-      <% end %>
-    </div>  <!-- / Widget-Body Post activity box-->
-  </div>  <!-- / Widget Post activity box-->
-</div>
+    <div class="padding-top-10 text-align-right">
+      <button type="submit" class="btn btn-blue">Post</button>
+    </div>
+  <% end %>
+<% end %>
+      
+<% if session[:role_type] == "Teacher" %>
+  <!-- <div class="col-lg-6 col-sm-6 col-sm-6 list-box">
+      <!-- Widget to display list of classes for teacher-->
+    <!--<div class="widget-header  widget-for-user">
+      <div class="profile__image">
+        <a href="#"><%= session[:initials] %></a>
+      </div>
+    </div>
+
+
+    <div class="widget-body widget-classes-body">
+        <div class="row row-specs-header"> <span class="caption-align-center">Actions </span> </div>
+          
+             <div class="row">
+                <div class="col-sm-6 col-user-specs">
+
+                       <a href='/students?classroomId=<%= @classroom_id %>&classname=<%= @classname %>'>
+                       <span class="menu-text"> Manage students </span></a>
+                                      
+                </div>
+             </div>
+    </div>
+  </div> -->
+<% end %>

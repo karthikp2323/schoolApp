@@ -32,8 +32,12 @@ class SchoolUsersController < ApplicationController
 
     else
      
-    end    
-    
+    end 
+    @school_user = SchoolUser.new   
+    @activity = Activity.new #For creating new activity
+    @classroom_id = params[:class_id]
+    @classname = params[:classname]
+    @activities = Activity.where("classroom_id = ? AND school_user_id = ?", params[:class_id], session[:user_id]).order("created_at DESC").page(params[:page]).per_page(10)
   end
   
   def listTeachers

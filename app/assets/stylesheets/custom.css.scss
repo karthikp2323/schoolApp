@@ -58,6 +58,21 @@ body{
 		.sidebar-menu{
 		 	li{
 		 		left: 0px;
+		 		.submenu{
+		 			&:before{
+		 				bottom: 0px;
+		 			}
+		 			li{
+		 				height: 50px;
+		 				a{
+		 					&:before{
+		 						top: 23px;
+		 					}
+		 					height: 100%;
+		 					line-height: 50px;
+		 				}
+		 			}
+		 		}
 		 	}
 		}
 	}
@@ -263,7 +278,7 @@ body{
 	.calendar{
 		background: #fba32a;
 	}
-	.comment{
+	.comment_icon{
 		background: #fecc38;
 	}
 	.first{

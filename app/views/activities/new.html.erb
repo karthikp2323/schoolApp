@@ -1,11 +1,24 @@
-<% provide(:title, "Dashboard") %>
+<% if session[:role_type] == "Teacher" %>
+  <% provide(:title, @classname) %>
+<% else %>
+  <% provide(:title, "Dashboard") %>
+<% end %>
+<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'https://maps.gstatic.com/intl/en_us/mapfiles/api-3/17/0/main.js', 'data-turbolinks-track' => true %>
 <div class="page-breadcrumbs">
   <ul class="breadcrumb">
     <li>
         <i class="fa fa-home"></i>
-        <%= link_to 'Home', '#' %>
+        <% if session[:role_type] == "Teacher" %>
+          <%= link_to 'Home', '/school_users/schoolUserHomeView' %>
+        <% else %>
+          <%= link_to 'Home', '#' %>
+        <% end %>
     </li>
     <!-- <li class="active"><%= @classname %></li> -->
+    <% if session[:role_type] == "Teacher" %>
+      <li class="active"><%= @classname %></li>
+    <% end %>
   </ul>
 </div>
 
@@ -32,51 +45,372 @@
 
 <div class="page-body">
   <div class="row">
-
-    <div class="col-lg-12 col-sm-12 col-sm-12"> <!-- div main-->
-
-      <div class ="row"> <!-- div main row-->
-        <% if session[:role_type] == "Teacher" || session[:role_type] == "Admin" %>
-          <%= render 'form' %>
-        <% end %>
-          
-        <% if session[:role_type] == "Teacher" %>
-          <div class="col-lg-6 col-sm-6 col-sm-6 list-box">
-              <!-- Widget to display list of classes for teacher-->
-            <div class="widget-header  widget-for-user">
-              <div class="profile__image">
-                <a href="#"><%= session[:initials] %></a>
-              </div>
-            </div>
-
-
-            <div class="widget-body widget-classes-body">
-                <div class="row row-specs-header"> 
-                  <span class="caption-align-center">Actions </span> 
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="profile-container">
+            <div class="profile-header row">
+                <div class="col-lg-2 col-md-4 col-sm-12 text-center">
+                    <!-- <img src="assets/img/avatars/divyia.jpg" alt="" class="header-avatar" /> -->
+                    <div class='row'>
+                      <%= image_tag 'profile_default.jpg', alt: "", :class => 'header-avatar' %>
+                    </div>
+                    <%#= session[:initials] %>
+                    <% if session[:role_type] == "Teacher" %>
+                      <div class='row'>
+                        <a href='/students?classroomId=<%= @classroom_id %>&classname=<%= @classname %>' class= 'btn btn-palegreen btn-sm  btn-follow'>
+                          Manage students
+                        </a>
+                      </div>
+                    <% end %>
                 </div>
-                  
-                <div class="row">
-                  <div class="col-sm-6 col-user-specs">
-                    <a href='/students?classroomId=<%= @classroom_id %>&classname=<%= @classname %>'>
-                    <span class="menu-text"> Manage students </span></a>
+                <div class="col-lg-5 col-md-8 col-sm-12 profile-info">
+                  <div class="header-fullname"><%= session[:initials] %></div>
+                  <a href="#" class="btn btn-palegreen btn-sm  btn-follow">
+                    <i class="fa fa-check"></i>
+                    Following
+                  </a>
+                  <div class="header-information">
+                    Kim is a software developer in Microsoft. She works in ASP.NET MVC Team and collaborates with other teams.
                   </div>
                 </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
+                  <% if session[:role_type] == "Teacher" || session[:role_type] == "Admin" %>
+                    <div class='row'>
+                      <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 stats-col'>
+                        <%= render 'form' %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
             </div>
-          </div>
-        <% end %>
+            <div class="profile-body">
+                <div class="col-lg-12">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs tabs-flat  nav-justified" id="myTab11">
+                          <li class="active">
+                              <a data-toggle="tab" href="#overview">
+                                  Overview
+                              </a>
+                          </li>
+                          <li>
+                              <a data-toggle="tab" href="#timeline">
+                                  Events
+                              </a>
+                          </li>
+                        </ul>
+                        <div class="tab-content tabs-flat">
+                          <div id="overview" class="tab-pane active">
+                            <div class="row profile-overview">
+                              <div class="col-md-8">
+                                  <h6 class="row-title before-themeprimary no-margin-top">PROFILE VISITS</h6>
+                                  <div id="visit-chart" class="chart"></div>
+                                  <h6 class="row-title before-orange">FOLLOWERS</h6>
+                                  <div class="row">
+                                    <div class="col-lg-4 col-sm-6 col-xs-12">
+                                      <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                          <%= image_tag 'Javi-Jimenez.jpg', style: "width:65px; height:65px;" %>
+                                        </div>
+                                        <div class="databox-right padding-top-20 bg-whitesmoke">
+                                          <div class="databox-stat orange radius-bordered">
+                                            <i class="stat-icon glyphicon glyphicon-remove"></i>
+                                          </div>
+                                          <div class="databox-text darkgray">JAVI JIMENEZ</div>
+                                          <div class="databox-text darkgray">Manager</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6 col-xs-12">
+                                      <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                            <%= image_tag 'adam-jansen.jpg', style: "width:65px; height:65px;" %>
+                                        </div>
+                                        <div class="databox-right padding-top-20 bg-whitesmoke">
+                                          <div class="databox-stat palegreen radius-bordered">
+                                            <i class="stat-icon glyphicon glyphicon-plus"></i>
+                                          </div>
+                                          <div class="databox-text darkgray">LEE MUNROE</div>
+                                          <div class="databox-text darkgray">Developer</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6 col-xs-12">
+                                      <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                          <%= image_tag 'Nicolai-Larson.jpg', style: "width:65px; height:65px;" %>
+                                        </div>
+                                        <div class="databox-right padding-top-20 bg-whitesmoke">
+                                          <div class="databox-stat palegreen radius-bordered">
+                                            <i class="stat-icon glyphicon glyphicon-plus"></i>
+                                          </div>
+                                          <div class="databox-text darkgray">NICOLAI LARSON</div>
+                                          <div class="databox-text darkgray">Manager</div>
+                                        </div>
+                                      </div>
+                                    </div>
 
-      </div> <!-- EOF div main row-->
+                                  </div>
+                                  <h6 class="row-title before-palegreen">FOLLOWING</h6>
+                                  <div class="row">
+                                    <div class="col-lg-4 col-sm-6 col-xs-12">
+                                      <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                          <%= image_tag 'John-Smith.jpg', style: "width:65px; height:65px;" %>
+                                        </div>
+                                        <div class="databox-right padding-top-20 bg-whitesmoke">
+                                          <div class="databox-stat orange radius-bordered">
+                                            <i class="stat-icon glyphicon glyphicon-remove"></i>
+                                          </div>
+                                          <div class="databox-text darkgray">JOHN SMITH</div>
+                                          <div class="databox-text darkgray">Architect</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6 col-xs-12">
+                                      <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                          <%= image_tag 'Matt-Cheuvront.jpg', style: "width:65px; height:65px;" %>
+                                        </div>
+                                        <div class="databox-right padding-top-20 bg-whitesmoke">
+                                          <div class="databox-stat palegreen radius-bordered">
+                                            <i class="stat-icon glyphicon glyphicon-plus"></i>
+                                          </div>
+                                          <div class="databox-text darkgray">MATT CHEUVRONT</div>
+                                          <div class="databox-text darkgray">Developer</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6 col-xs-12">
+                                      <div class="databox databox-graded">
+                                        <div class="databox-left no-padding">
+                                          <%= image_tag 'Stephanie-Walter.jpg', style: "width:65px; height:65px;" %>
+                                        </div>
+                                        <div class="databox-right padding-top-20 bg-whitesmoke">
+                                          <div class="databox-stat orange radius-bordered">
+                                            <i class="stat-icon glyphicon glyphicon-remove"></i>
+                                          </div>
+                                          <div class="databox-text darkgray">KATE WALTER</div>
+                                          <div class="databox-text darkgray">Developer</div>
+                                        </div>
+                                      </div>
+                                    </div>
 
-      <div id="avtivities" class="row" >
-         <%= render 'activity' %>
-      </div>
-        
-      <div class="row">
-        <%= will_paginate @activities%>  
-      </div>
-    </div> <!-- EOF div main-->
+                                  </div>
+                                  <h6 class="row-title before-yellow">YOU MAY ALSO KNOW</h6>
+                                  <div class="row">
+                                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                                      <div class="databox databox-xlg databox-halved databox-shadowed databox-vertical no-margin-bottom">
+                                        <div class="databox-top bg-white padding-10">
+                                          <div class="col-lg-4 col-sm-4 col-xs-4">
+                                            <%= image_tag 'Sergey-Azovskiy.jpg', style: "width:75px; height:75px;", class: "image-circular bordered-3 bordered-palegreen" %>
+                                          </div>
+                                          <div class="col-lg-8 col-sm-8 col-xs-8 text-align-left padding-10">
+                                            <span class="databox-header carbon no-margin">Martin James</span>
+                                            <span class="databox-text lightcarbon no-margin"> Software Manager at Microsoft </span>
+                                          </div>
+                                        </div>
+                                        <div class="databox-bottom bg-white no-padding">
+                                          <div class="databox-row row-12">
+                                            <div class="databox-row row-6 no-padding">
+                                              <div class="databox-cell cell-4 no-padding text-align-center bordered-right bordered-platinum">
+                                                <span class="databox-text sonic-silver  no-margin">Posts</span>
+                                                <span class="databox-number lightcarbon no-margin">510</span>
+                                              </div>
+                                              <div class="databox-cell cell-4 no-padding text-align-center bordered-right bordered-platinum">
+                                                <span class="databox-text sonic-silver no-margin">Followers</span>
+                                                <span class="databox-number lightcarbon no-margin">908</span>
+                                              </div>
+                                              <div class="databox-cell cell-4 no-padding text-align-center">
+                                                <span class="databox-text sonic-silver no-margin">Following</span>
+                                                <span class="databox-number lightcarbon no-margin">286</span>
+                                              </div>
+                                            </div>
+                                            <div class="databox-row row-6 padding-10">
+                                              <button class="btn btn-palegreen btn-sm pull-right">FOLLOW</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                                      <div class="databox databox-xlg databox-halved databox-shadowed databox-vertical no-margin-bottom">
+                                        <div class="databox-top bg-white padding-10">
+                                          <div class="col-lg-4 col-sm-4 col-xs-4">
+                                            <%= image_tag 'Osvaldus-Valutis.jpg', style: "width:75px; height:75px;", :class => "image-circular bordered-3 bordered-palegreen" %>
+                                          </div>
+                                          <div class="col-lg-8 col-sm-8 col-xs-8 text-align-left padding-10">
+                                            <span class="databox-header carbon no-margin">Osvaldus Valutis</span>
+                                            <span class="databox-text lightcarbon no-margin"> Graphic Designer at Yahoo! </span>
+                                          </div>
+                                        </div>
+                                        <div class="databox-bottom bg-white no-padding">
+                                          <div class="databox-row row-12">
+                                            <div class="databox-row row-6 no-padding">
+                                              <div class="databox-cell cell-4 no-padding text-align-center bordered-right bordered-platinum">
+                                                <span class="databox-text sonic-silver  no-margin">Posts</span>
+                                                <span class="databox-number lightcarbon no-margin">102</span>
+                                              </div>
+                                              <div class="databox-cell cell-4 no-padding text-align-center bordered-right bordered-platinum">
+                                                <span class="databox-text sonic-silver no-margin">Followers</span>
+                                                <span class="databox-number lightcarbon no-margin">634</span>
+                                              </div>
+                                              <div class="databox-cell cell-4 no-padding text-align-center">
+                                                <span class="databox-text sonic-silver no-margin">Following</span>
+                                                <span class="databox-number lightcarbon no-margin">100</span>
+                                              </div>
+                                            </div>
+                                            <div class="databox-row row-6 padding-10">
+                                              <button class="btn btn-palegreen btn-sm pull-right">FOLLOW</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div>
+                                  <div class="comment">
+                                    <%= image_tag 'adam-jansen.jpg', :class => 'comment-avatar' %>
+                                    <div class="comment-body">
+                                      <div class="comment-text">
+                                        <div class="comment-header">
+                                          <a href="#" title="">Adam Jansen</a><span>about 2 minuts ago</span>
+                                        </div>
+                                        Story based around the idea of time lapse, animation to post soon!
+                                      </div>
+                                      <div class="comment-footer">
+                                        <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
+                                        <a href="#"><i class="fa fa-thumbs-o-down"></i></a>
+                                        <a href="#">Reply</a>
+                                      </div>
+                                    </div>
+
+                                    <div class="comment">
+                                        <%= image_tag 'John-Smith.jpg', :class => 'comment-avatar' %>
+                                        <div class="comment-body">
+                                            <div class="comment-text">
+                                                <div class="comment-header">
+                                                    <a href="#" title="">John Smith</a><span>about 1 hour ago</span>
+                                                </div>
+                                                Wow impressive!
+                                            </div>
+                                            <div class="comment-footer">
+                                                <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
+                                                <a href="#"><i class="fa fa-thumbs-o-down"></i></a>
+                                                <a href="#">Reply</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="comment">
+                                      <%= image_tag 'Matt-Cheuvront.jpg', class: 'comment-avatar' %>
+                                      <div class="comment-body">
+                                        <div class="comment-text">
+                                          <div class="comment-header">
+                                              <a href="#" title="">Matt Cheuvront</a><span>about 2 hours ago</span>
+                                          </div>
+                                          Wow, that is really nice.
+                                        </div>
+                                        <div class="comment-footer">
+                                          <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
+                                          <a href="#"><i class="fa fa-thumbs-o-down"></i></a>
+                                          <a href="#">Reply</a>
+                                        </div>
+                                      </div>
+
+                                      <div class="comment">
+                                        <%= image_tag 'Stephanie-Walter.jpg', class: 'comment-avatar' %>
+                                        <div class="comment-body">
+                                          <div class="comment-text">
+                                              <div class="comment-header">
+                                                  <a href="#" title="">Stephanie Walter</a><span>3 hours ago</span>
+                                              </div>
+                                              Nice work, makes me think of The Money Pit.
+                                          </div>
+                                          <div class="comment-footer">
+                                              <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
+                                              <a href="#"><i class="fa fa-thumbs-o-down"></i></a>
+                                              <a href="#">Reply</a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment">
+                                    <%= image_tag 'divyia.jpg', :class => 'comment-avatar' %>
+                                    <div class="comment-body">
+                                      <div class="comment-text">
+                                        <div class="comment-header">
+                                          <a href="#" title="">Kim Ryder</a><span>about 4 hours ago</span>
+                                        </div>
+                                        i'm in the middle of a timelapse animation myself! (Very different though.) Awesome stuff.
+                                      </div>
+                                      <div class="comment-footer">
+                                        <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
+                                        <a href="#"><i class="fa fa-thumbs-o-down"></i></a>
+                                        <a href="#">Reply</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="comment">
+                                    <%= image_tag 'Nicolai-Larson.jpg', :class => 'comment-avatar' %>
+                                    <div class="comment-body">
+                                      <div class="comment-text">
+                                        <div class="comment-header">
+                                          <a href="#" title="">Nicolai Larson</a><span>10 hours ago</span>
+                                        </div>
+                                        the parallax is a little odd but O.o that house build is awesome!!
+                                      </div>
+                                      <div class="comment-footer">
+                                        <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
+                                        <a href="#"><i class="fa fa-thumbs-o-down"></i></a>
+                                        <a href="#">Reply</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div id="timeline" class="tab-pane">
+                            <ul class="timeline animated fadeInDown">
+                              <%= render 'activity' %>
+                              <li class="timeline-node">
+                                  <a class="btn btn-yellow">LOAD MORE</a>
+                              </li>
+                              <li>
+                                <div class="row">
+                                  <%= will_paginate @activities%>  
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 </div>
+
+<script type="text/javascript">
+    jQuery(function() {
+      
+      if ($('.pagination').length) {
+        $(window).scroll(function() {
+          var url;
+          url = $('.pagination .next_page').attr('href');
+            if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 40 && window.location.pathname == "/activities/new") 
+            {
+              $('.pagination').text("Fetching more activities...");
+              return $.getScript(url);
+            }
+        });
+        return $(window).scroll();
+      }
+    });
+</script>
 
 
 <!-- <div id="divChat">

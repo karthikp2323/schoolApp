@@ -49,35 +49,39 @@
 </div>
 
 <script>
+  
   $(document).ready(function() {
-    
-    $('#calendar').fullCalendar({
-      defaultView: 'agendaWeek',
-      events: '/events.json',
-      height: 480,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,oneweek,day' // buttons for switching between views
-      },
-      views: {
-        month: {
-            type: 'agenda',
-            duration: { days: 30 },
-            buttonText: 'Month'
-        },
-        oneweek: {
-            type: 'agenda',
-            duration: { days: 7 },
-            buttonText: 'Week'
-        },
-        day: {
-            type: 'agenda',
-            duration: { days: 1 },
-            buttonText: 'Day'
-        }
-      },
-      eventClick: function(event, jsEvent, view) {}
-    });
+      
+      $('#calendar').fullCalendar({
+          defaultView: 'agendaWeek',
+          events: '/events.json',
+          height: 480,
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,oneweek,day' // buttons for switching between views
+          },
+          views: {
+              month: {
+                  type: 'agenda',
+                  duration: { days: 30 },
+                  buttonText: 'Month'
+              },
+              oneweek: {
+                  type: 'agenda',
+                  duration: { days: 7 },
+                  buttonText: 'Week'
+              },
+              day: {
+                  type: 'agenda',
+                  duration: { days: 1 },
+                  buttonText: 'Day'
+              }
+          },
+          eventClick: function(event, jsEvent, view) {
+            
+              
+          }
+      });
   });
 </script>

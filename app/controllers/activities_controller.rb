@@ -24,14 +24,14 @@ class ActivitiesController < ApplicationController
       
       #@activities.school_user
       
-      elsif session[:role_type] == "Parent"
+    elsif session[:role_type] == "Parent"
        
       @activity = Activity.new  
       @activities = Activity.where(classroom_id: ClassRegistration.select("classroom_id").where(student_id: params[:student_id])).order("created_at DESC").page(params[:page]).per_page(10)
      
       
       
-      else 
+    else 
       
       @activity = Activity.new #For creating new activity
       @classroom_id = params[:class_id]

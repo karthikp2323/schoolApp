@@ -93,8 +93,8 @@ class StudentsController < ApplicationController
   # DELETE /students/1.json
   def destroy
     
-        @student = Student.find(params[:studentId])
-        @student.destroy
+    @student = Student.find(params[:id])
+    @student.destroy
 
     respond_to do |format|
       format.html { redirect_to controller: 'students', action: 'index', classroomId: params[:classroomId], notice: 'Student was successfully destroyed.' }
