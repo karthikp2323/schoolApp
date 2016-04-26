@@ -12,11 +12,11 @@
 //
 //= require skins.min
 //= require jquery
-//= require turbolinks
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/dialog
 //= require jquery-ui/autocomplete
+//= require turbolinks
+//= require jquery.turbolinks
 //= require jquery.remotipart
 //= require bootstrap-sprockets
 //= require jquery.slimscroll.min
@@ -66,6 +66,7 @@ jQuery(document).ready(function($){
 	$('.banner_content').css('padding-top', ($(window).height()-$('.banner_content').height())/2);
 
 	$('[data-toggle="tooltip"]').tooltip();
+
 });
 $(window).load(function(){
 	$('.page-sidebar .sidebar-menu a').click(function(){

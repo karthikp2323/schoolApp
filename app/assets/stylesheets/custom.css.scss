@@ -333,4 +333,12 @@ body{
 			}
 		}
 	}
+	#avtivities{
+		.timeline-node{
+			display: none;
+			&:last-child{
+				display: block;
+			}
+		}
+	}
 }

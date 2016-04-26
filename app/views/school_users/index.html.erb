@@ -174,25 +174,26 @@
 
       function getClasses(teacherId){
         $('#lbl_message_for_getclasses').html("");
-        $('#tableClassList').html("");
+        $('#dialog_get_classes #teacherDataTable_wrapper').show();
+        // $('#tableClassList').html("");
         $.ajax({
           method: "GET",
           url: "/classrooms/getClassesForTeacher",
           data: {user_id: teacherId}
         })
         .done(function(data){
-          if(data.length == 0)
-          {
-            $('#lbl_message_for_getclasses').html("No Classes Assigned");
+          if(data.length == 0){
+            $('#dialog_get_classes #lbl_message_for_getclasses').html("No Classes Assigned");
+            // $('#dialog_get_classes table').hide();
+          } else {
+            $('#dialog_get_classes tbody').html("");
+            $.each( data, function(index) {
+              $('#dialog_get_classes tbody').append('<tr><td >'+data[index].class_name +'</td><td>'+ data[index].class_level +'</td><td> <i class="glyphicon glyphicon-map-marker"></i> '+  data[index].class_location+' </td></tr>');
+            });
           }
-
-          $.each( data, function(index) {
-            $('#tableClassList').append('<tr><td > <h4> '+data[index].class_name +'</h4> \n '+ data[index].class_level +' <i class="glyphicon glyphicon-map-marker"></i> '+  data[index].class_location+' </td></tr>');
-          });
-
           $("#dialog_get_classes").dialog({
             maxHeight: 500,
-            width: 370,
+            width: 800,
             title: "Classes Assigned",
             // position: { my: "center", at: "center", of: ".div-teacher-list" },
             modal: true,
@@ -202,6 +203,19 @@
               }
             }
           });
+
+          if ( $.fn.dataTable.isDataTable( '#dialog_get_classes #teacherDataTable' ) ) {
+            table = $('#dialog_get_classes #teacherDataTable').DataTable();
+          }
+          else {
+            table = $('#dialog_get_classes #teacherDataTable').DataTable( {
+              paging: false
+            } );
+          }
+
+          if(data.length == 0){
+            $('#dialog_get_classes #teacherDataTable_wrapper').hide();
+          }
 
         });
       };

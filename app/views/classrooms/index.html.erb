@@ -106,7 +106,7 @@
         $("#dialog_view_students").hide();
         $("#dialog_add_students").hide();
 
-        $(function() {
+        // $(function() {
           // return $("#classroomtable").dataTable({});
           // if ( $.fn.dataTable.isDataTable( '#classroomtable' ) ) {
           //   table = $('#classroomtable').DataTable();
@@ -116,8 +116,9 @@
           //     // paging: false
           //   } );
           // }
-          return $('#classroomtable').DataTable();
-        });
+        //   return $('#classroomtable').DataTable();
+        // });
+        $('#classroomtable').DataTable();
       });
 
 
@@ -150,8 +151,9 @@
 
       function getStudentList(classId){
         //console.log("classroomId:"+ classId);
-        $('#tableStudentList').html("");
+        $('#studentlist_table tbody').html('');
         $('#lbl_message_for_get_students').html("");
+        $('#dialog_view_students #studentlist_table_wrapper').show();
         $.ajax({
           method:"GET",
           url: "/classrooms/getStudentsList",
@@ -160,13 +162,14 @@
           //console.log(data);
           if (data.length == 0) {
             $('#lbl_message_for_get_students').text("No Students Were Assigned");
-          } else{                
-            $('#lbl_teacher_name').text($("#"+classId).find("td")[3].innerText);
-            $('#lbl_class_name').text($("#"+classId).find("td")[0].innerText);
+          } else{
             $.each( data, function(index) {
-              $('#tableStudentList').append('<tr><td > <h4> '+data[index][1] + " "+data[index][2] +'</h4> \n '+ "Parent name: " + data[index][4]+ " "+ data[index][5]+' </td></tr>');
+              $('#studentlist_table tbody').append('<tr><td >'+data[index][1] + ' ' + data[index][2] +'</td><td>' + data[index][4]+ ' ' + data[index][5] + ' </td></tr>');
             });
           }
+          $('#lbl_teacher_name').html($("#"+classId).find("td")[3].innerText);
+          $('#lbl_class_name').html($("#"+classId).find("td")[0].innerText);
+
           $("#dialog_view_students").dialog({
             maxHeight: 500,
             width: 570,
@@ -179,6 +182,20 @@
               }
             }
           });
+
+          if ( $.fn.dataTable.isDataTable( '#dialog_view_students #studentlist_table' ) ) {
+            table = $('#dialog_view_students #studentlist_table').DataTable();
+          }
+          else {
+            table = $('#dialog_view_students #studentlist_table').DataTable( {
+              paging: false,
+              searching: false,
+            } );
+          }
+
+          if(data.length == 0){
+            $('#dialog_view_students #studentlist_table_wrapper').hide();
+          }
         }); //EOF Ajax function
       }; // EOF function getStudentList
 

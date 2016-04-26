@@ -61,5 +61,15 @@
 	  </div>
 	</li>
 <% end %>
-
-
+<li class="timeline-node">
+	<% if @activities.current_page != @activities.total_pages %>
+		<% if session[:role_type] == "Admin" %>
+	  	<%= link_to 'Load More', new_activity_path(:page => (@activities.current_page + 1)), :remote => true, :id => 'show_more_link', :class => "btn btn-yellow" %>
+	  <% elsif session[:role_type] == "Parent" %>
+	  	<%= link_to 'Load More', new_activity_path(:page => (@activities.current_page + 1), :class_id => @classroomId), :remote => true, :id => 'show_more_link', :class => "btn btn-yellow" %>
+	  <% else %>
+	  	<%#= link_to 'Load More', new_activity_path(:page => @activities.current_page + 1, :class_id => @classroomId, :classname => @classname ), :remote => true, :id => 'show_more_link', :class => "btn btn-yellow" %>
+	  	<a href='<%= request.original_url + "&page=#{@activities.current_page + 1}" %>' id="show_more_link" class="btn btn-yellow" data-remote="true">Load More</a>
+	  <% end %>
+	<% end %>
+</li>
