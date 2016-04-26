@@ -29,41 +29,17 @@
       <%= f.file_field :image %>
     </div>
 
-    <!-- <div class='form-group'>
+    <div class='form-group'>
       <%= f.check_box :activity_type %>
       <%= f.check_box :allow_comment %>
       <%= f.text_field :classroom_id, {:value => @classroom_id, :hidden => true} %>
       <%= f.text_field :school_user_id, {:value => session[:user_id], :hidden => true}%>
       <%= f.text_field :school_id, {:value => session[:school_id], :hidden => true}%>
-    </div> -->
+    </div> 
 
     <div class="padding-top-10 text-align-right">
       <button type="submit" class="btn btn-blue">Post</button>
     </div>
   <% end %>
 <% end %>
-      
-<% if session[:role_type] == "Teacher" %>
-  <!-- <div class="col-lg-6 col-sm-6 col-sm-6 list-box">
-      <!-- Widget to display list of classes for teacher-->
-    <!--<div class="widget-header  widget-for-user">
-      <div class="profile__image">
-        <a href="#"><%= session[:initials] %></a>
-      </div>
-    </div>
 
-
-    <div class="widget-body widget-classes-body">
-        <div class="row row-specs-header"> <span class="caption-align-center">Actions </span> </div>
-          
-             <div class="row">
-                <div class="col-sm-6 col-user-specs">
-
-                       <a href='/students?classroomId=<%= @classroom_id %>&classname=<%= @classname %>'>
-                       <span class="menu-text"> Manage students </span></a>
-                                      
-                </div>
-             </div>
-    </div>
-  </div> -->
-<% end %>

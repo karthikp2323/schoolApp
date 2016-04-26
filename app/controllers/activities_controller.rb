@@ -52,13 +52,12 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     
     if @activity.save
-      @activities = Array.wrap(@activity) #converting to array
-
-
-      respond_to do |format|
-
-          format.js 
-      end
+      # @activities = Array.wrap(@activity) #converting to array
+      # @activities = Array.wrap(@activity).page(params[:page]).per_page(10)
+      redirect_to action: "new"
+      # respond_to do |format|
+      #   format.js 
+      # end
     end
     
   end
