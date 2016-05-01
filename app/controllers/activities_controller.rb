@@ -52,12 +52,13 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     
     if @activity.save
-      # @activities = Array.wrap(@activity) #converting to array
+      @activities = Array.wrap(@activity) #converting to array
+      # @activities = Activity.where("classroom_id = ? AND school_user_id = ?", params[:class_id], session[:user_id]).order("created_at DESC").page(params[:page]).per_page(10)
       # @activities = Array.wrap(@activity).page(params[:page]).per_page(10)
-      redirect_to action: "new"
-      # respond_to do |format|
-      #   format.js 
-      # end
+      # redirect_to action: "new"
+      respond_to do |format|
+        format.js 
+      end
     end
     
   end

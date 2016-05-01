@@ -1,6 +1,5 @@
-
-$('#avtivities').prepend('<%= j render 'activity' %>');   
-
-// $('#avtivities').prepend('<%= escape_javascript(render partial: 'activity') %>');
-
-
+if($('#activities li:first-child').hasClass('timeline-inverted')){
+	$('#activities').prepend('<%= j render 'create_odd' %>');
+} else {
+	$('#activities').prepend('<%= j render 'create_even' %>');
+}   
