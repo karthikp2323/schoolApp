@@ -9,7 +9,14 @@ def attempt_login
         #decrypt password (bcrypt gem is used)
         authorized_user = found_user.authenticate(params[:password])
           if authorized_user
-          render json: authorized_user 
+          roles = Role.find(authorized_user.role_id)
+          role_type = roles.role_type
+
+          render json: {
+            :authorized_user => authorized_user, 
+            :role_type => role_type
+          }
+
           else
           render json: "Invalid Credentials"
           end  

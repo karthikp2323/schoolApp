@@ -15,6 +15,8 @@ begin
     @events = Event.all  
   when "Teacher"
     @events = Event.where("school_user_id = ?", params[:user_id])  
+  when "Parent"
+    @events = Event.where(classroom_id: ClassRegistration.select("classroom_id").where(student_id: Student.select("id").where(parent_id: params[:user_id])))
   end
   
   render json: @events
@@ -201,6 +203,7 @@ def create
 
       
 end
+
 
 def updateEventStatus
 

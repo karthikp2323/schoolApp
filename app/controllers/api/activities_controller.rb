@@ -7,24 +7,75 @@ skip_before_action :verify_authenticity_token, only: [:create]
 def getActivities
     
     begin
-    
-      if params[:role_type] == "Admin"
+      
+      role_type = params[:role_type]
+      
+      case role_type
+      
+      when "Admin"
         @activitiesForAdmin = Activity.where(school_id: params[:school_id]).order("created_at DESC").page(params[:page]).per_page(7)
         render json: @activitiesForAdmin
+      
+      when "Parent"
 
-      elsif params[:role_type] == "Parent"
+        if params[:last_activity_id] != nil
+          
+          
+           @activities = Activity.where("(classroom_id IN (SELECT `class_registrations`.`classroom_id` FROM `class_registrations`
+                                  WHERE `class_registrations`.`student_id` = ?) AND activities.id < ?) and (student_id is null or student_id = ?)", params[:student_id],params[:last_activity_id], params[:student_id])
+                                   .joins('left join students on activities.student_id = students.id')
+                                   .order("created_at DESC").page(params[:page]).per_page(10)
+                 
+
+          return_activities
+        elsif params[:first_activity_id] != nil
+          
+          
+          @activities = Activity.where("(classroom_id IN (SELECT `class_registrations`.`classroom_id` FROM `class_registrations`
+                                  WHERE `class_registrations`.`student_id` = ?) AND activities.id > ?) and (student_id is null or student_id = ?)", params[:student_id],params[:first_activity_id], params[:student_id])
+                                   .joins('left join students on activities.student_id = students.id')
+                                   .order("created_at DESC")
+
+          return_activities
+        else
+            
+            @activities = Activity.where("classroom_id IN (SELECT `class_registrations`.`classroom_id` FROM `class_registrations`
+                                           WHERE `class_registrations`.`student_id` = ?) and student_id is null or student_id = ?", params[:student_id], params[:student_id])
+                                   .joins('left join students on activities.student_id = students.id')
+                                   .order("created_at DESC").page(params[:page]).per_page(10)
+            return_activities
+          
+        end
         
-        @activitiesForParent = @activities = Activity.where(classroom_id: ClassRegistration.select("classroom_id").where(student_id: params[:student_id])).order("created_at DESC").page(params[:page]).per_page(7)
-        render json: @activitiesForParent.to_json(:only => [:id, :title, :message, :created_at], :methods => [:image_url])  
+      when "Teacher"
 
+        if params[:last_activity_id] != nil
+            @activities = Activity.where("classroom_id = ? AND school_user_id = ? AND activities.id < ?", params[:class_id], params[:user_id], params[:last_activity_id])
+                                            .joins('left join students on activities.student_id = students.id')
+                                            .order("created_at DESC").page(params[:page]).per_page(10)  
 
-      else 
-        @activitiesForTeacher = Activity.where("classroom_id = ? AND school_user_id = ?", params[:class_id], params[:user_id]).order("created_at DESC").page(params[:page]).per_page(7)  
-        render json: @activitiesForTeacher.to_json(:only => [:id, :title, :message, :created_at], :methods => [:image_url])  
+            return_activities
+        elsif params[:first_activity_id] != nil
+
+             @activities = Activity.where("classroom_id = ? AND school_user_id = ? AND activities.id > ?", params[:class_id], params[:user_id], params[:first_activity_id])
+                                            .joins('left join students on activities.student_id = students.id')
+                                            .order("created_at DESC")
+
+             return_activities
+           else 
+
+            @activities = Activity.where("classroom_id = ? AND school_user_id = ?", params[:class_id], params[:user_id])
+                                            .joins('left join students on activities.student_id = students.id').order("created_at DESC").page(params[:page]).per_page(10)  
+            
+            return_activities
+          
+        end
+        
         #Activity.where("classroom_id = ? AND school_user_id = ?", params[:class_id], params[:user_id]).order("created_at DESC")
         #@model.to_json(:only => [:id,:name,:homephone,:cellphone], :methods => [:avatar_url])
-
       end
+
+    
     
     rescue Exception => e
         render json: e.message
@@ -45,6 +96,10 @@ def create
         @activity.image = params[:image]
       end
       
+      if params[:student_id] != " "
+        @activity.student_id = params[:student_id]
+      end
+
       @activity.title = params[:title]
       @activity.message = params[:message]
       @activity.classroom_id = params[:classroom_id]
@@ -66,6 +121,15 @@ def create
 
 end
 
+def load_activities_for_parent(option, value)
+
+     @activities = Activity.where("classroom_id IN (SELECT `class_registrations`.`classroom_id` FROM `class_registrations`
+                                  WHERE `class_registrations`.`student_id` = ?) and student_id is null AND "+ option +"or student_id = ?", params[:student_id],value, params[:student_id])
+                                   .joins('left join students on activities.student_id = students.id')
+                                   .order("created_at DESC").page(params[:page]).per_page(10)
+                 
+
+end
 
 def parse_image_data(image_data)
   
@@ -91,6 +155,24 @@ def parse_image_data(image_data)
     end
   end
   
+def return_activities
+    
+      studentList = []
+            
+      @activities.each do |activity|
+        studentList.push(activity.student) 
+      end
+
+      @activities = @activities.to_json(:only => [:id, :title, :message, :student_id, :created_at], :methods => [:image_url])
+      parsedActivities = JSON.parse(@activities)
+            #render json: @activitiesForTeacher.to_json(:only => [:id, :title, :message, :created_at], :methods => [:image_url])  
+            
+          render :json => {
+                 :activities => parsedActivities,
+                 :students =>  studentList
+          }
+
+  end  
 
 private
 
