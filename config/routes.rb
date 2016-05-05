@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   
   get 'api/school_users/getClassList', to: 'api/school_users#getClassList'
-
+  get 'api/school_users/get_teacher_list', to: 'api/school_users#get_teacher_list'
 
   get 'api/activities/getActivities', to: 'api/activities#getActivities'
   post 'api/activities/create', to:  'api/activities#create'
@@ -16,6 +16,15 @@ Rails.application.routes.draw do
 
   post 'api/parents/check_login', to: 'api/parents#check_login'
   get 'api/parents/getChildList', to: 'api/parents#getChildList'
+
+  
+
+  get 'api/students/getStudentsForClass', to: 'api/students#getStudentsForClass'
+
+  post 'api/messages/save_message', to: 'api/messages#save_message'
+  get 'api/messages/get_messages', to: 'api/messages#get_messages'
+  get 'api/messages/details_unread', to: 'api/messages#details_unread'
+  post 'api/messages/update_unread_record', to: 'api/messages#update_unread_record'
 
   namespace :api do
     resources :events

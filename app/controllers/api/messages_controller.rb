@@ -87,7 +87,7 @@ class Api::MessagesController < ApplicationController
 
 			render json: @unread
 		elsif params[:role_type] == "Teacher"
-			debugger
+			
 			@unread = UnreadCountForSchoolUser.find_by(parent_id: params[:sender_id], school_user_id: params[:receiver_id],school_id: params[:school_id], classroom_id: params[:classroom_id])
 
 			if @unread
@@ -100,6 +100,7 @@ class Api::MessagesController < ApplicationController
 	end
 
 	def details_unread
+
 		if params[:role_type] == "Parent"
 			@unread = MessagesAndEventsCountForParent.where(:parent_id => params[:user_id])
 			render json: @unread

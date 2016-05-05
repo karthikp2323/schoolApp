@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
@@ -74,6 +74,9 @@ gem 'momentjs-rails'
 gem "font-awesome-rails"
 gem 'font-awesome-sass'
 
+#For sending push notification to devices
+gem 'apns'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -93,8 +96,8 @@ end
 #  gem 'spring'
 #end
 
-group :production do
-	gem 'pg'
-	gem 'rails_12factor'
-end
+#group :production do
+#	gem 'pg'
+#	gem 'rails_12factor'
+#end
 

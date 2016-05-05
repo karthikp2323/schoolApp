@@ -2,7 +2,7 @@ class Activity < ActiveRecord::Base
   require "paperclip"
   belongs_to :classroom
   belongs_to :school_user
-
+  belongs_to :student
 
   has_attached_file :image, :styles => {:small => "150x150>"},
   					:url  => "/assets/products/:id/:style/:basename.:extension",

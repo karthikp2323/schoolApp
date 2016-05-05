@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324144602) do
+ActiveRecord::Schema.define(version: 20160504151225) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "title",              limit: 255
@@ -27,11 +27,13 @@ ActiveRecord::Schema.define(version: 20160324144602) do
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
     t.integer  "school_id",          limit: 4
+    t.integer  "student_id",         limit: 4
   end
 
   add_index "activities", ["classroom_id"], name: "index_activities_on_classroom_id", using: :btree
   add_index "activities", ["school_id"], name: "index_activities_on_school_id", using: :btree
   add_index "activities", ["school_user_id"], name: "index_activities_on_school_user_id", using: :btree
+  add_index "activities", ["student_id"], name: "index_activities_on_student_id", using: :btree
 
   create_table "class_registrations", force: :cascade do |t|
     t.integer  "classroom_id", limit: 4
@@ -99,28 +101,74 @@ ActiveRecord::Schema.define(version: 20160324144602) do
   add_index "events", ["school_user_id"], name: "index_events_on_school_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.text     "message_text",   limit: 65535
-    t.integer  "parent_id",      limit: 4
-    t.integer  "school_user_id", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.text     "message_text", limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "receiver_id",  limit: 4
+    t.integer  "sender_id",    limit: 4
+    t.string   "subject",      limit: 255
+    t.integer  "school_id",    limit: 4
+    t.integer  "classroom_id", limit: 4
   end
 
-  add_index "messages", ["parent_id"], name: "index_messages_on_parent_id", using: :btree
-  add_index "messages", ["school_user_id"], name: "index_messages_on_school_user_id", using: :btree
+  add_index "messages", ["classroom_id"], name: "index_messages_on_classroom_id", using: :btree
+  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
+  add_index "messages", ["school_id"], name: "index_messages_on_school_id", using: :btree
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+
+  create_table "messages_and_events_count_for_parents", force: :cascade do |t|
+    t.integer  "unread_messages", limit: 4
+    t.integer  "unread_events",   limit: 4
+    t.integer  "parent_id",       limit: 4
+    t.integer  "school_user_id",  limit: 4
+    t.integer  "school_id",       limit: 4
+    t.integer  "classroom_id",    limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "messages_and_events_count_for_parents", ["classroom_id"], name: "index_messages_and_events_count_for_parents_on_classroom_id", using: :btree
+  add_index "messages_and_events_count_for_parents", ["parent_id"], name: "index_messages_and_events_count_for_parents_on_parent_id", using: :btree
+  add_index "messages_and_events_count_for_parents", ["school_id"], name: "index_messages_and_events_count_for_parents_on_school_id", using: :btree
+  add_index "messages_and_events_count_for_parents", ["school_user_id"], name: "index_messages_and_events_count_for_parents_on_school_user_id", using: :btree
 
   create_table "parents", force: :cascade do |t|
-    t.string   "mom_fname",  limit: 255
-    t.string   "mom_lname",  limit: 255
-    t.string   "dad_fname",  limit: 255
-    t.string   "dad_lname",  limit: 255
-    t.string   "email_id",   limit: 255
-    t.string   "contact",    limit: 255
-    t.string   "login_id",   limit: 255
-    t.string   "password",   limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "mom_fname",                             limit: 255
+    t.string   "mom_lname",                             limit: 255
+    t.string   "dad_fname",                             limit: 255
+    t.string   "dad_lname",                             limit: 255
+    t.string   "email_id",                              limit: 255
+    t.string   "contact",                               limit: 255
+    t.string   "login_id",                              limit: 255
+    t.string   "password",                              limit: 255
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.integer  "{:index=>true, :foreign_key=>true}_id", limit: 4
+    t.string   "image_file_name",                       limit: 255
+    t.string   "image_content_type",                    limit: 255
+    t.integer  "image_file_size",                       limit: 4
+    t.datetime "image_updated_at"
   end
+
+  create_table "push_notifications_for_parents", force: :cascade do |t|
+    t.string   "devise_type",  limit: 255
+    t.string   "devise_token", limit: 255
+    t.integer  "parent_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "push_notifications_for_parents", ["parent_id"], name: "index_push_notifications_for_parents_on_parent_id", using: :btree
+
+  create_table "push_notifications_for_schoo_users", force: :cascade do |t|
+    t.string   "devise_type",    limit: 255
+    t.string   "devise_token",   limit: 255
+    t.integer  "school_user_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "push_notifications_for_schoo_users", ["school_user_id"], name: "index_push_notifications_for_schoo_users_on_school_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "role_type",  limit: 25
@@ -129,16 +177,21 @@ ActiveRecord::Schema.define(version: 20160324144602) do
   end
 
   create_table "school_users", force: :cascade do |t|
-    t.string   "first_name",      limit: 255
-    t.string   "last_name",       limit: 255
-    t.string   "email_id",        limit: 255
-    t.string   "contact",         limit: 255
-    t.string   "login_id",        limit: 255
-    t.integer  "role_id",         limit: 4
-    t.integer  "school_id",       limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "password_digest", limit: 255
+    t.string   "first_name",                            limit: 255
+    t.string   "last_name",                             limit: 255
+    t.string   "email_id",                              limit: 255
+    t.string   "contact",                               limit: 255
+    t.string   "login_id",                              limit: 255
+    t.integer  "role_id",                               limit: 4
+    t.integer  "school_id",                             limit: 4
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "password_digest",                       limit: 255
+    t.integer  "{:index=>true, :foreign_key=>true}_id", limit: 4
+    t.string   "image_file_name",                       limit: 255
+    t.string   "image_content_type",                    limit: 255
+    t.integer  "image_file_size",                       limit: 4
+    t.datetime "image_updated_at"
   end
 
   add_index "school_users", ["role_id"], name: "index_school_users_on_role_id", using: :btree
@@ -193,6 +246,22 @@ ActiveRecord::Schema.define(version: 20160324144602) do
   add_index "students", ["parent_id"], name: "index_students_on_parent_id", using: :btree
   add_index "students", ["school_id"], name: "index_students_on_school_id", using: :btree
 
+  create_table "unread_count_for_school_users", force: :cascade do |t|
+    t.integer  "unread_messages", limit: 4
+    t.integer  "unread_events",   limit: 4
+    t.integer  "parent_id",       limit: 4
+    t.integer  "school_user_id",  limit: 4
+    t.integer  "school_id",       limit: 4
+    t.integer  "classroom_id",    limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "unread_count_for_school_users", ["classroom_id"], name: "index_unread_count_for_school_users_on_classroom_id", using: :btree
+  add_index "unread_count_for_school_users", ["parent_id"], name: "index_unread_count_for_school_users_on_parent_id", using: :btree
+  add_index "unread_count_for_school_users", ["school_id"], name: "index_unread_count_for_school_users_on_school_id", using: :btree
+  add_index "unread_count_for_school_users", ["school_user_id"], name: "index_unread_count_for_school_users_on_school_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -214,6 +283,7 @@ ActiveRecord::Schema.define(version: 20160324144602) do
   add_foreign_key "activities", "classrooms"
   add_foreign_key "activities", "school_users"
   add_foreign_key "activities", "schools"
+  add_foreign_key "activities", "students"
   add_foreign_key "class_registrations", "classrooms"
   add_foreign_key "class_registrations", "students"
   add_foreign_key "classrooms", "school_users"
@@ -226,11 +296,21 @@ ActiveRecord::Schema.define(version: 20160324144602) do
   add_foreign_key "events", "classrooms"
   add_foreign_key "events", "school_users"
   add_foreign_key "events", "schools"
-  add_foreign_key "messages", "parents"
-  add_foreign_key "messages", "school_users"
+  add_foreign_key "messages", "classrooms"
+  add_foreign_key "messages", "schools"
+  add_foreign_key "messages_and_events_count_for_parents", "classrooms"
+  add_foreign_key "messages_and_events_count_for_parents", "parents"
+  add_foreign_key "messages_and_events_count_for_parents", "school_users"
+  add_foreign_key "messages_and_events_count_for_parents", "schools"
+  add_foreign_key "push_notifications_for_parents", "parents"
+  add_foreign_key "push_notifications_for_schoo_users", "school_users"
   add_foreign_key "school_users", "roles"
   add_foreign_key "school_users", "schools"
   add_foreign_key "studentlogindetails", "students"
   add_foreign_key "students", "parents"
   add_foreign_key "students", "schools"
+  add_foreign_key "unread_count_for_school_users", "classrooms"
+  add_foreign_key "unread_count_for_school_users", "parents"
+  add_foreign_key "unread_count_for_school_users", "school_users"
+  add_foreign_key "unread_count_for_school_users", "schools"
 end
