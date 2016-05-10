@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
   belongs_to :school_user
   belongs_to :student
 
-  has_attached_file :image, :styles => {:small => "150x150>"},
+  has_attached_file :image, :styles => {:small => "450x450>"},
   					:url  => "/assets/products/:id/:style/:basename.:extension",
                   	:path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
 

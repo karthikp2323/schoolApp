@@ -9,7 +9,11 @@ skip_before_action :verify_authenticity_token, only: [:check_login]
 			if params[:username].present? && params[:password].present?
 	        	found_user = Parent.where("login_id = ? AND password = ?", params[:username], params[:password]).first
 	        	if found_user
-	        		render json: found_user
+
+	        		found_user = found_user.to_json(:only => [:id, :mom_fname, :mom_lname, :dad_fname, :dad_lname, :login_id, :email_id, :contact], :methods => [:image_url])
+      			    parsedActivities = JSON.parse(found_user)
+      
+	        		render json: parsedActivities
 	        	else
 	        		render json: "Invalid Credentials"
 	        	end	

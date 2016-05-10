@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   get 'api/school_users/getClassList', to: 'api/school_users#getClassList'
   get 'api/school_users/get_teacher_list', to: 'api/school_users#get_teacher_list'
+  post 'api/school_users/update_user', to: 'api/school_users#update_user'
 
   get 'api/activities/getActivities', to: 'api/activities#getActivities'
   post 'api/activities/create', to:  'api/activities#create'
@@ -39,7 +40,7 @@ Rails.application.routes.draw do
   end
   
   get 'api/home/attempt_login', to: 'api/home#attempt_login'
-
+  post 'api/home/save_devise_information', to: 'api/home#save_devise_information'
 
 
   get 'school_users/schoolUserHomeView', to: 'school_users#schoolUserHomeView'

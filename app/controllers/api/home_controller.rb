@@ -1,5 +1,6 @@
 class Api::HomeController < ApplicationController
 after_action :set_access_control_headers
+skip_before_action :verify_authenticity_token, only: [:save_devise_information]
 
 def attempt_login
 	
@@ -11,10 +12,16 @@ def attempt_login
           if authorized_user
           roles = Role.find(authorized_user.role_id)
           role_type = roles.role_type
+          school_name = School.find(authorized_user.school_id)
+
+          authorized_user = authorized_user.to_json(:only => [:id, :first_name, :last_name, :email_id, :contact, :login_id, :role_id, :school_id], :methods => [:image_url])
+          parsedActivities = JSON.parse(authorized_user)
+      
 
           render json: {
-            :authorized_user => authorized_user, 
-            :role_type => role_type
+            :authorized_user => parsedActivities, 
+            :role_type => role_type,
+            :school => school_name
           }
 
           else
@@ -32,6 +39,61 @@ def attempt_login
   end #end of if params
   
 end #end of def attempt_login
+
+def save_devise_information
+
+    begin
+      
+      if params[:role_type] == "Teacher"
+          
+          @deviseInformation =   PushNotificationsForSchoolUser.find_by(devise_token: params[:devise_token]);
+
+          if @deviseInformation == nil
+            
+             @deviseInformation = PushNotificationsForSchoolUser.new
+             @deviseInformation.devise_type = params[:devise_type]
+             @deviseInformation.devise_token = params[:devise_token]
+             @deviseInformation.school_user_id = params[:user_id]
+             @deviseInformation.save
+
+           elsif @deviseInformation.school_user_id != params[:user_id].to_i
+             @deviseInformation.school_user_id = params[:user_id]
+             @deviseInformation.save
+
+          end
+         
+
+          render json: "Devise information saved"
+
+      elsif params[:role_type] == "Parent"
+
+        @deviseInformation =   PushNotificationsForParent.find_by(devise_token: params[:devise_token]);
+
+        if @deviseInformation == nil
+
+          @deviseInformation = PushNotificationsForParent.new
+          @deviseInformation.devise_type = params[:devise_type]
+          @deviseInformation.devise_token = params[:devise_token]
+          @deviseInformation.parent_id = params[:user_id]
+          @deviseInformation.save
+          
+
+          elsif @deviseInformation.parent_id != params[:user_id].to_i
+             @deviseInformation.parent_id = params[:user_id]
+             @deviseInformation.save
+
+          end
+
+        
+
+          render json: "Devise information saved"
+      end #EOF if params[:role_type]
+
+    rescue Exception => e
+          render json: e.message
+    end #EOF begin
+  
+end
 
 
 private
